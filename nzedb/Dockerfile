@@ -48,7 +48,7 @@ RUN apt-get install -y \
   tar tig tree tzdata \
   unrar unzip util-linux \
   vim \
-  wget \
+  wget mediainfo \
   zendframework
 
 #s6 installer
@@ -68,20 +68,20 @@ RUN apt-get -y install \
 RUN curl https://getcomposer.org/installer | php7.4 -- --install-dir=/usr/bin --filename=composer --version=1.10.19
 
 # Build and install mediainfo
-ENV MEDIAINFO_VERSION 20.09
-RUN apt-get install gcc g++ && \
-  mkdir -p /tmp && \
-  cd /tmp && \
-  curl -s -o mediainfo.tar.gz \
-    https://mediaarea.net/download/binary/mediainfo/${MEDIAINFO_VERSION}/MediaInfo_CLI_${MEDIAINFO_VERSION}_GNU_FromSource.tar.gz && \
-  tar xzvf mediainfo.tar.gz && \
-  cd MediaInfo_CLI_GNU_FromSource && \
-  ./CLI_Compile.sh && \
-  cd MediaInfo/Project/GNU/CLI && \
-  make install && \
-  cd / && \
-  rm -rf /tmp && \
-  apt purge gcc g++
+# ENV MEDIAINFO_VERSION 20.09
+# RUN apt-get install gcc g++ && \
+#   mkdir -p /tmp && \
+#   cd /tmp && \
+#   curl -s -o mediainfo.tar.gz \
+#     https://mediaarea.net/download/binary/mediainfo/20.09/mediainfo_20.09-1_amd64.xUbuntu_18.04.deb && \
+#   tar xzvf mediainfo.tar.gz && \
+#   cd MediaInfo_CLI_GNU_FromSource && \
+#   ./CLI_Compile.sh && \
+#   cd MediaInfo/Project/GNU/CLI && \
+#   make install && \
+#   cd / && \
+#   rm -rf /tmp && \
+#   apt purge gcc g++
 
 # Install Python MySQL Modules
 RUN pip3 install --upgrade pip && \
