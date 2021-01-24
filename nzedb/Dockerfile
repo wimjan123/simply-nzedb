@@ -54,7 +54,7 @@ RUN apk add --update \
   rm -rf /var/cache/apk/*
 
 # Install composer
-RUN curl https://getcomposer.org/installer | php7 -- --install-dir=/usr/bin --filename=composer
+RUN curl https://getcomposer.org/installer | php7 -- --install-dir=/usr/bin --filename=composer --version=1.10.19
 
 # Build and install mediainfo
 ENV MEDIAINFO_VERSION 20.09
