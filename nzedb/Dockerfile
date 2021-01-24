@@ -22,9 +22,9 @@ apt-get clean
 
 # RUN apk --update-cache add ca-certificates && \
     # echo "https://dl.bintray.com/php-alpine/v3.11/php-7.4" >> /etc/apk/repositories
-RUN sudo apt-get update -y
+RUN apt-get update -y
 
-RUN sudo apt-get install -y \
+RUN apt-get install -y \
   bash bwm-ng \
   coreutils curl \
   ffmpeg file findutils \
@@ -54,7 +54,7 @@ RUN sudo apt-get install -y \
 # vnstat in testing repo
 
 # mytop + deps
-RUN sudo apt-get install \
+RUN apt-get install \
   mariadb \
   perl \
   perl-dbd-mysql \
@@ -67,7 +67,7 @@ RUN curl https://getcomposer.org/installer | php7 -- --install-dir=/usr/bin --fi
 
 # Build and install mediainfo
 ENV MEDIAINFO_VERSION 20.09
-RUN sudo apt-get install gcc g++ && \
+RUN apt-get install gcc g++ && \
   mkdir -p /tmp && \
   cd /tmp && \
   curl -s -o mediainfo.tar.gz \
@@ -122,7 +122,7 @@ RUN mkdir -p /var/www && \
 
 # Build tmux 2.0 since tmux 2.2 has issues: https://github.com/nZEDb/nZEDb/issues/2182
 ENV TMUX_VERSION 3.1c
-RUN sudo apt-get install gcc g++ ncurses-dev libevent-dev bsd-compat-headers && \
+RUN apt-get install gcc g++ ncurses-dev libevent-dev bsd-compat-headers && \
   mkdir -p /tmp/tmux && \
   cd /tmp/tmux && \
   curl --location -o tmux.tar.gz https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz && \
@@ -139,7 +139,7 @@ RUN sudo apt-get install gcc g++ ncurses-dev libevent-dev bsd-compat-headers && 
 # Build and install php-yenc
 ENV PHP_ZEPHIR_PARSER_VERSION v1.3.6
 RUN cd /tmp && \
-  sudo apt-get install gcc re2c libc-dev sudo && \
+   apt-get install gcc re2c libc-dev  && \
   mkdir -p /tmp/zephir && \
   cd /tmp/zephir && \
   composer require phalcon/zephir && \
@@ -151,7 +151,7 @@ RUN cd /tmp && \
   phpize && \
   ./configure && \
   make && \
-  sudo make install && \
+   make install && \
   echo "extension=zephir_parser.so" > /etc/php7/conf.d/98_zephir_parser.ini && \
   cd /tmp && \
   git clone https://github.com/niel/php-yenc.git && \
@@ -161,11 +161,11 @@ RUN cd /tmp && \
   composer clear-cache && \
   cd /tmp && \
   rm -rf zephir php-yenc php-zephir-parser && \
-  apk del --purge gcc re2c libc-dev sudo
+  apk del --purge gcc re2c libc-dev
 
 # Build and install par2
 ENV PAR2_VERSION "v0.8.1"
-RUN sudo apt-get install gcc autoconf automake g++ python-dev openssl-dev libffi-dev && \
+RUN apt-get install gcc autoconf automake g++ python-dev openssl-dev libffi-dev && \
   git clone https://github.com/Parchive/par2cmdline.git /tmp/par2 && \
   cd /tmp/par2 && \
   git checkout --quiet --force $PAR2_VERSION && \
@@ -176,7 +176,7 @@ RUN sudo apt-get install gcc autoconf automake g++ python-dev openssl-dev libffi
   cd / && \
   rm -rf /tmp/par2 && \
   apk del --purge automake gcc autoconf g++ python-dev openssl-dev libffi-dev && \
-  sudo apt-get install libgomp
+   apt-get install libgomp
 
 # Create dir for importing nzbs
 RUN mkdir -p /var/www/nZEDb/resources/import
