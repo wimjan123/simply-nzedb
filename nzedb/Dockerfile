@@ -1,4 +1,4 @@
-FROM alpine:3.13
+FROM alpine:3.12
 MAINTAINER thewillonline
 
 # Configure Timezone
@@ -8,7 +8,10 @@ RUN rm -f /etc/localtime && \
   echo "${TIMEZONE}" > /etc/timezone
 
 #Adding repository for php7.4
-RUN apk add --no-cache  --repository http://dl-cdn.alpinelinux.org/alpine/edge/community php
+ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
+
+RUN apk --update-cache add ca-certificates && \
+    echo "https://dl.bintray.com/php-alpine/v3.12/php-7.4" >> /etc/apk/repositories
 
 RUN apk add --update \
   bash bwm-ng \
