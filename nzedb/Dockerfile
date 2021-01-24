@@ -22,7 +22,10 @@ apt-get clean
 
 # RUN apk --update-cache add ca-certificates && \
     # echo "https://dl.bintray.com/php-alpine/v3.11/php-7.4" >> /etc/apk/repositories
-RUN apt-get update -y
+RUN apt-get update -y && \
+    apt-get install software-properties-common && \
+    add-apt-repository ppa:ondrej/php && \
+    apt-get update
 
 RUN apt-get install -y \
   bash bwm-ng \
@@ -58,9 +61,7 @@ RUN apt-get install \
   mariadb \
   perl \
   perl-dbd-mysql \
-  perl-term-readkey \
-  && \
-  rm -rf /var/cache/apk/*
+  perl-term-readkey
 
 # Install composer
 RUN curl https://getcomposer.org/installer | php7.4 -- --install-dir=/usr/bin --filename=composer --version=1.10.19
@@ -79,8 +80,7 @@ RUN apt-get install gcc g++ && \
   make install && \
   cd / && \
   rm -rf /tmp && \
-  apk del --purge gcc g++ && \
-  rm -rf /var/cache/apk/*
+  apt purge gcc g++
 
 # Install Python MySQL Modules
 RUN pip3 install --upgrade pip && \
