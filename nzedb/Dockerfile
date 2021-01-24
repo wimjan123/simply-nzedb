@@ -38,21 +38,20 @@ RUN apt-get install -y \
   make mariadb-client memcached musl \
   nginx \
   p7zip php7.4-ctype php7.4-curl php7.4-dev php7.4-exif php7.4-fpm php7.4-gd php7.4-iconv \
-  php7.4-imagick php7.4-json php7.4-mcrypt php7.4-opcache php7.4-openssl php7.4-pcntl \
-  php7.4-pdo php7.4-pdo_mysql php7.4-pear php7.4-phar php7.4-posix php7.4-redis php7.4-mbstring \
-  php7.4-session php7.4-simplexml php7.4-sockets php7.4-xmlwriter php7.4-zlib php7.4-xml php7.4-xmlreader php7.4-xmlrpc pigz libmcrypt \
-  proxychains-ng pstree py3-pip python3 \
+  php7.4-imagick php7.4-json php7.0-mcrypt php7.4-opcache \
+  php7.4-pdo php7.4-phar php7.4-posix php7.4-redis php7.4-mbstring \
+  php7.4-simplexml php7.4-sockets php7.4-xmlwriter php7.4-xml php7.4-xmlreader php7.4-xmlrpc pigz libmcrypt \
+  proxychains-ng pstree python3-pip python3 \
   s6 strace \
   tar tig tree tzdata \
   unrar unzip util-linux \
   vim \
   wget \
   zendframework \
-  && \
-  # ln -s /usr/bin/php7.4 /usr/bin/php && \
-  # ln -s /usr/bin/php7.4.4 /usr/bin/php && \
-  # ln -s /usr/lib/php7.4.4 /usr/lib/php7.4 && \
-  rm -rf /var/cache/apk/*
+
+#s6 installer
+ADD https://github.com/just-containers/s6-overlay/releases/download/v2.2.0.1/s6-overlay-amd64-installer /tmp/
+RUN chmod +x /tmp/s6-overlay-amd64-installer && /tmp/s6-overlay-amd64-installer /
 
 # vnstat in testing repo
 
@@ -151,7 +150,7 @@ RUN cd /tmp && \
   phpize && \
   ./configure && \
   make && \
-   make install && \
+  make install && \
   echo "extension=zephir_parser.so" > /etc/php7.4/conf.d/98_zephir_parser.ini && \
   cd /tmp && \
   git clone https://github.com/niel/php-yenc.git && \
@@ -175,7 +174,7 @@ RUN apt-get install gcc autoconf automake g++ python-dev openssl-dev libffi-dev 
   make install && \
   cd / && \
   rm -rf /tmp/par2 && \
-  apk del --purge automake gcc autoconf g++ python-dev openssl-dev libffi-dev && \
+  apt remove --purge automake gcc autoconf g++ python-dev openssl-dev libffi-dev && \
    apt-get install libgomp
 
 # Create dir for importing nzbs
