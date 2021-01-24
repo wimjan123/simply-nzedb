@@ -37,6 +37,7 @@ RUN apk add --update \
   wget \
   zendframework \
   && \
+  ln -s /usr/bin/php7 /usr/bin/php && \
   rm -rf /var/cache/apk/*
 
 # vnstat in testing repo
