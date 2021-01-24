@@ -180,7 +180,8 @@ RUN apt install -y tmux
 #   rm -rf /tmp/par2 && \
 #   apt remove --purge automake gcc autoconf g++ python-dev openssl-dev libffi-dev && \
 #    apt-get install libgomp
-RUN apt-get install -y par2 libgomp
+RUN apt-get install -y par2
+#libgomp
 # Create dir for importing nzbs
 RUN mkdir -p /var/www/nZEDb/resources/import
 
