@@ -42,16 +42,16 @@ RUN apt-get install -y \
   php7.4-pdo php7.4-phar php7.4-posix php7.4-redis php7.4-mbstring \
   php7.4-simplexml php7.4-sockets php7.4-xmlwriter php7.4-xml php7.4-xmlreader php7.4-xmlrpc pigz libmcrypt \
   proxychains-ng pstree python3-pip python3 \
-  s6 strace \
+  strace \
   tar tig tree tzdata \
   unrar unzip util-linux \
   vim \
   wget \
-  zendframework \
+  zendframework
 
 #s6 installer
 ADD https://github.com/just-containers/s6-overlay/releases/download/v2.2.0.1/s6-overlay-amd64-installer /tmp/
-RUN chmod +x /tmp/s6-overlay-amd64-installer && /tmp/s6-overlay-amd64-installer /
+RUN chmod +x /tmp/s6-overlay-amd64-installer && ./tmp/s6-overlay-amd64-installer /
 
 # vnstat in testing repo
 
