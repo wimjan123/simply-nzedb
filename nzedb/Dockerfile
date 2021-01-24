@@ -71,9 +71,9 @@ RUN apk --update add gcc g++ && \
   rm -rf /var/cache/apk/*
 
 # Install Python MySQL Modules
-RUN pip install --upgrade pip && \
-  pip install --upgrade setuptools && \
-  pip install cymysql pynntp socketpool
+RUN pip3 install --upgrade pip3 && \
+  pip3 install --upgrade setuptools && \
+  pip3 install cymysql pynntp socketpool
 
 # Configure PHP
 RUN sed -ri 's/(max_execution_time =) ([0-9]+)/\1 120/' /etc/php7/php.ini && \
