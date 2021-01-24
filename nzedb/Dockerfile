@@ -24,7 +24,7 @@ apt-get clean
     # echo "https://dl.bintray.com/php-alpine/v3.11/php-7.4" >> /etc/apk/repositories
 RUN sudo apt-get update -y
 
-RUN sudo apt-get install -y
+RUN sudo apt-get install -y \
   bash bwm-ng \
   coreutils curl \
   ffmpeg file findutils \
