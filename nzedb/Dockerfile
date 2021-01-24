@@ -58,7 +58,7 @@ RUN chmod +x /tmp/s6-overlay-amd64-installer && ./tmp/s6-overlay-amd64-installer
 # vnstat in testing repo
 
 # mytop + deps
-RUN apt-get install \
+RUN apt-get -y install \
   mariadb-server  \
   perl \
   libmysqlclient-dev \
