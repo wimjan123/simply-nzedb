@@ -142,7 +142,7 @@ RUN apt install -y tmux
 # Build and install php-yenc
 ENV PHP_ZEPHIR_PARSER_VERSION v1.3.6
 RUN cd /tmp && \
-   apt-get install gcc re2c libc-dev  && \
+   apt-get install -y gcc re2c libc-dev  && \
   mkdir -p /tmp/zephir && \
   cd /tmp/zephir && \
   composer require phalcon/zephir && \
