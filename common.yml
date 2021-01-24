@@ -2,7 +2,7 @@ version: '2'
 services:
 
   database:
-    image: slydetector/simply-nzedb-mariadb
+    image: thewillonline/nzedb-mariadb:10.4
     restart: unless-stopped
     volumes:
       - $PWD/data/var_lib_mysql:/var/lib/mysql
@@ -17,7 +17,7 @@ services:
       - "3306"
 
   nzedb:
-    image: slydetector/simply-nzedb
+    image: thewillonline/nzedb:latest
     restart: unless-stopped
     ports:
       - 8800:8800
