@@ -91,11 +91,11 @@ RUN mkdir -p /var/log/nginx && \
     chmod 755 /var/log/nginx && \
     chmod 777 /tmp && \
     touch /var/log/nginx/nginx-error.log && \
-    ln -sf /dev/stderr /var/log/nginx/nginx-error.log && \
+    ln -sf /dev/stderr /var/log/nginx/nginx-error.log &&\
     ln -sf /dev/stdout /var/log/nginx/nginx-access.log
 
 # Clone nZEDb and set directory permissions
-ENV NZEDB_VERSION "v0.8.22.0"
+ENV NZEDB_VERSION "v0.x"
 RUN mkdir -p /var/www && \
   cd /var/www && \
   git clone https://github.com/nZEDb/nZEDb.git && \
