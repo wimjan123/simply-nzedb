@@ -95,7 +95,7 @@ RUN mkdir -p /var/log/nginx && \
     ln -sf /dev/stdout /var/log/nginx/nginx-access.log
 
 # Clone nZEDb and set directory permissions
-ENV NZEDB_VERSION "v0.x"
+ENV NZEDB_VERSION "0.x"
 RUN mkdir -p /var/www && \
   cd /var/www && \
   git clone https://github.com/nZEDb/nZEDb.git && \
