@@ -93,8 +93,8 @@ RUN pip3 install --upgrade pip && \
 RUN sed -ri 's/(max_execution_time =) ([0-9]+)/\1 120/' /etc/php/7.4/fpm/php.ini && \
   sed -ri "s/(memory_limit =) (.*$)/\1 -1/" /etc/php/7.4/fpm/php.ini && \
   sed -ri 's/;(date.timezone =)/\1 Europe\/Amsterdam/' /etc/php/7.4/fpm/php.ini && \
-  sed -ri 's/listen\s*=\s*127.0.0.1:9000/listen = 9000/g' /etc/php7.4/fpm.d/www.conf && \
-  sed -ri 's|;include_path = ".:/php/includes"|include_path = ".:/usr/share/php7.4"|g' /etc/php7.4/php.ini && \
+  sed -ri 's/listen\s*=\s*127.0.0.1:9000/listen = 9000/g' /etc/php/7.4/fpm/pool.d/www.conf && \
+  sed -ri 's|;include_path = ".:/php/includes"|include_path = ".:/usr/share/php7.4"|g' /etc/php7.4/fpm/php.ini && \
   mkdir -p /var/log/php7.4-fpm/ && \
   ln -sf /dev/stdout /var/log/php7.4-fpm.log
 
