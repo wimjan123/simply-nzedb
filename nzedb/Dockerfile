@@ -140,31 +140,31 @@ RUN apt install -y tmux
 #   rm -rf /var/cache/apk/*
 
 # Build and install php-yenc
-ENV PHP_ZEPHIR_PARSER_VERSION v1.3.6
-RUN cd /tmp && \
-   apt-get install -y gcc re2c libc-dev  && \
-  mkdir -p /tmp/zephir && \
-  cd /tmp/zephir && \
-  composer require phalcon/zephir && \
-  cd /tmp && \
-  git clone git://github.com/phalcon/php-zephir-parser.git && \
-  cd php-zephir-parser && \
-  git checkout --quiet --force $PHP_ZEPHIR_PARSER_VERSION && \
-  # ./install && \
-  phpize && \
-  ./configure && \
-  make && \
-  make install && \
-  echo "extension=zephir_parser.so" > /etc/php7.3/conf.d/98_zephir_parser.ini && \
-  cd /tmp && \
-  git clone https://github.com/niel/php-yenc.git && \
-  cd php-yenc && \
-  /tmp/zephir/vendor/bin/zephir install && \
-  echo "extension=yenc.so" > /etc/php7.3/conf.d/99_yenc.ini && \
-  composer clear-cache && \
-  cd /tmp && \
-  rm -rf zephir php-yenc php-zephir-parser && \
-  apk del --purge gcc re2c libc-dev
+# ENV PHP_ZEPHIR_PARSER_VERSION v1.3.6
+# RUN cd /tmp && \
+#    apt-get install -y gcc re2c libc-dev  && \
+#   mkdir -p /tmp/zephir && \
+#   cd /tmp/zephir && \
+#   composer require phalcon/zephir && \
+#   cd /tmp && \
+#   git clone git://github.com/phalcon/php-zephir-parser.git && \
+#   cd php-zephir-parser && \
+#   git checkout --quiet --force $PHP_ZEPHIR_PARSER_VERSION && \
+#   # ./install && \
+#   phpize && \
+#   ./configure && \
+#   make && \
+#   make install && \
+#   echo "extension=zephir_parser.so" > /etc/php7.3/conf.d/98_zephir_parser.ini && \
+#   cd /tmp && \
+#   git clone https://github.com/niel/php-yenc.git && \
+#   cd php-yenc && \
+#   /tmp/zephir/vendor/bin/zephir install && \
+#   echo "extension=yenc.so" > /etc/php7.3/conf.d/99_yenc.ini && \
+#   composer clear-cache && \
+#   cd /tmp && \
+#   rm -rf zephir php-yenc php-zephir-parser && \
+#   apk del --purge gcc re2c libc-dev
 
 # Build and install par2
 ENV PAR2_VERSION "v0.8.1"
