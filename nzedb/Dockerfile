@@ -25,6 +25,8 @@ apt-get clean
 RUN apt-get update -y && \
     apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:ondrej/php && \
+    sudo apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc' && \
+    sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] https://mirror.zol.co.zw/mariadb/repo/10.5/ubuntu bionic main' && \
     apt-get update -y
 
 RUN apt-get install -y \
@@ -57,10 +59,10 @@ RUN chmod +x /tmp/s6-overlay-amd64-installer && ./tmp/s6-overlay-amd64-installer
 
 # mytop + deps
 RUN apt-get install \
-  mariadb-client-10.5 \
+  mariadb-server-10.5  \
   perl \
   libmysqlclient-dev \
-  libterm-readkey-perl 
+  libterm-readkey-perl
 
 # Install composer
 RUN curl https://getcomposer.org/installer | php7.4 -- --install-dir=/usr/bin --filename=composer --version=1.10.19
