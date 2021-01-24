@@ -138,7 +138,11 @@ RUN cd /tmp && \
   git clone git://github.com/phalcon/php-zephir-parser.git && \
   cd php-zephir-parser && \
   git checkout --quiet --force $PHP_ZEPHIR_PARSER_VERSION && \
-  ./install && \
+  # ./install && \
+  phpize && \
+  ./configure && \
+  make && \
+  sudo make install && \
   echo "extension=zephir_parser.so" > /etc/php7/conf.d/98_zephir_parser.ini && \
   cd /tmp && \
   git clone https://github.com/niel/php-yenc.git && \
