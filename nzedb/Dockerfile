@@ -25,8 +25,8 @@ apt-get clean
 RUN apt-get update -y && \
     apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:ondrej/php && \
-    sudo apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc' && \
-    sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] https://mirror.zol.co.zw/mariadb/repo/10.5/ubuntu bionic main' && \
+    apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc' && \
+    add-apt-repository 'deb [arch=amd64,arm64,ppc64el] https://mirror.zol.co.zw/mariadb/repo/10.5/ubuntu bionic main' && \
     apt-get update -y
 
 RUN apt-get install -y \
