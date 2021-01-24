@@ -71,7 +71,7 @@ RUN apk --update add gcc g++ && \
   rm -rf /var/cache/apk/*
 
 # Install Python MySQL Modules
-RUN pip3 install --upgrade pip3 && \
+RUN pip3 install --upgrade pip && \
   pip3 install --upgrade setuptools && \
   pip3 install cymysql pynntp socketpool
 
