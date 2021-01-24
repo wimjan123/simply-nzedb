@@ -167,20 +167,20 @@ RUN apt install -y tmux
 #   apk del --purge gcc re2c libc-dev
 
 # Build and install par2
-ENV PAR2_VERSION "v0.8.1"
-RUN apt-get install gcc autoconf automake g++ python-dev openssl-dev libffi-dev && \
-  git clone https://github.com/Parchive/par2cmdline.git /tmp/par2 && \
-  cd /tmp/par2 && \
-  git checkout --quiet --force $PAR2_VERSION && \
-  ./automake.sh && \
-  ./configure --prefix=/usr && \
-  make && \
-  make install && \
-  cd / && \
-  rm -rf /tmp/par2 && \
-  apt remove --purge automake gcc autoconf g++ python-dev openssl-dev libffi-dev && \
-   apt-get install libgomp
-
+# ENV PAR2_VERSION "v0.8.1"
+# RUN apt-get install gcc autoconf automake g++ python-dev openssl-dev libffi-dev && \
+#   git clone https://github.com/Parchive/par2cmdline.git /tmp/par2 && \
+#   cd /tmp/par2 && \
+#   git checkout --quiet --force $PAR2_VERSION && \
+#   ./automake.sh && \
+#   ./configure --prefix=/usr && \
+#   make && \
+#   make install && \
+#   cd / && \
+#   rm -rf /tmp/par2 && \
+#   apt remove --purge automake gcc autoconf g++ python-dev openssl-dev libffi-dev && \
+#    apt-get install libgomp
+RUN apt-get install-y par2 libgomo
 # Create dir for importing nzbs
 RUN mkdir -p /var/www/nZEDb/resources/import
 
