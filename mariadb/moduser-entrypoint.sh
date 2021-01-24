@@ -6,7 +6,7 @@
 if [ -e "/mysql_user" ]; then
   source /mysql_user
 
-  if ! id --user $PUID; then 
+  if ! id --user $PUID; then
     echo "Changing mysql user to uid $PUID"
     usermod --uid $PUID mysql
   fi
@@ -19,4 +19,3 @@ if [ -e "/mysql_user" ]; then
 fi
 
 source /docker-entrypoint.sh
-

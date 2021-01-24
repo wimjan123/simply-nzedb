@@ -70,10 +70,11 @@ RUN pip install --upgrade pip && \
 # Configure PHP
 RUN sed -ri 's/(max_execution_time =) ([0-9]+)/\1 120/' /etc/php7.4/php.ini && \
   sed -ri "s/(memory_limit =) (.*$)/\1 -1/" /etc/php7.4/php.ini && \
-  sed -ri 's/;(date.timezone =)/\1 America\/Chicago/' /etc/php7.4/php.ini && \
+  sed -ri 's/;(date.timezone =)/\1 Europe\/Amsterdam/' /etc/php7.4/php.ini && \
   sed -ri 's/listen\s*=\s*127.0.0.1:9000/listen = 9000/g' /etc/php7.4/php-fpm.d/www.conf && \
   sed -ri 's|;include_path = ".:/php/includes"|include_path = ".:/usr/share/php7.4"|g' /etc/php7.4/php.ini && \
-  mkdir -p /var/log/php-fpm/
+  mkdir -p /var/log/php-fpm/ \
+  ln -sf /dev/stdout /var/log/php7.4-fpm.log
 
 # Install and configure nginx.
 RUN mkdir -p /var/log/nginx && \
@@ -81,7 +82,9 @@ RUN mkdir -p /var/log/nginx && \
     mkdir -p /tmp/nginx && \
     chmod 755 /var/log/nginx && \
     chmod 777 /tmp && \
-    touch /var/log/nginx/nginx-error.log
+    touch /var/log/nginx/nginx-error.log \
+    ln -sf /dev/stderr /var/log/nginx/nginx-error.log \
+    ln -sf /dev/stdout /var/log/nginx/nginx-access.log
 
 # Clone nZEDb and set directory permissions
 ENV NZEDB_VERSION "v0.8.22.0"

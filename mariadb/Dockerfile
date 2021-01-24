@@ -1,5 +1,5 @@
-FROM mariadb:10.1.23
-MAINTAINER theslydetector@gmail.com
+FROM mariadb:10.4
+MAINTAINER thewillonline
 
 # MariaDB Configuration
 RUN sed -i -r 's/bind-address.*$/bind-address = 0.0.0.0/' /etc/mysql/my.cnf \
