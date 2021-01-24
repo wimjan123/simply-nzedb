@@ -199,8 +199,8 @@ RUN mv /bin/gzip /bin/gzip.real && \
 RUN sed -i "s|UTF-8//IGNORE//TRANSLIT|UTF-8|g" /var/www/nZEDb/nzedb/utility/Text.php
 
 LABEL nzedb=$NZEDB_VERSION \
-  maintainer=theslydetector@gmail.com \
-  url=https://github.com/slydetector/simply-nzedb
+  maintainer=thewillonline \
+  url=https://github.com/wimjan123/simply-nzedb
 
 RUN mkdir -p /var/www/nZEDb/resources/tmp && chmod 777 /var/www/nZEDb/resources/tmp
 

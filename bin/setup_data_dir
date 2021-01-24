@@ -70,7 +70,7 @@ mkdir -p data/log
 mkdir -p data/import/inbox
 mkdir -p data/db_backups
 
-# Create as files otherwise docker will mount as directories 
+# Create as files otherwise docker will mount as directories
 touch data/log/nginx-access.log
 touch data/log/nginx-error.log
 touch data/log/php_errors.log
@@ -87,7 +87,7 @@ EOF
 # Written by predb_import_daily_batch.php
 touch data/predb_progress.txt
 
-# irc scraper 
+# irc scraper
 target="data/configuration/ircscraper_settings.php"
 cp etc/ircscraper_settings_example.php $target
 $sed "s/changeme_irc_username/${IRC_USERNAME}/g" $target
