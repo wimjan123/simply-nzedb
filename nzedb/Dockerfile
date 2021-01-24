@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.11
 MAINTAINER thewillonline
 
 # Configure Timezone
@@ -11,7 +11,9 @@ RUN rm -f /etc/localtime && \
 ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 
 RUN apk --update-cache add ca-certificates && \
-    echo "https://dl.bintray.com/php-alpine/v3.12/php-7.4" >> /etc/apk/repositories
+    echo "https://dl.bintray.com/php-alpine/v3.11/php-7.4" >> /etc/apk/repositories
+
+RUN apk add --no-cache  --repository http://dl-cdn.alpinelinux.org/alpine/edge/community php
 
 RUN apk add --update \
   bash bwm-ng \
@@ -27,7 +29,7 @@ RUN apk add --update \
   php7-imagick php7-json php7-mcrypt php7-opcache php7-openssl php7-pcntl \
   php7-pdo php7-pdo_mysql php7-pear php7-phar php7-posix php7-redis \
   php7-session php7-simplexml php7-sockets php7-xmlwriter php7-zlib pigz \
-  proxychains-ng pstree py2-pip python \
+  proxychains-ng pstree py3-pip python3 \
   s6 strace \
   tar tig tree tzdata \
   unrar unzip util-linux \
