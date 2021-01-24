@@ -8,12 +8,12 @@ RUN rm -f /etc/localtime && \
   echo "${TIMEZONE}" > /etc/timezone
 
 #Adding repository for php7.4
-ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
+# ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 
-RUN apk --update-cache add ca-certificates && \
-    echo "https://dl.bintray.com/php-alpine/v3.11/php-7.4" >> /etc/apk/repositories
+# RUN apk --update-cache add ca-certificates && \
+    # echo "https://dl.bintray.com/php-alpine/v3.11/php-7.4" >> /etc/apk/repositories
 
-RUN apk add --no-cache  --repository http://dl-cdn.alpinelinux.org/alpine/edge/community php
+RUN apk add --no-cache  --repository http://dl-cdn.alpinelinux.org/alpine/v3.11/community php
 
 RUN apk add --update \
   bash bwm-ng \
