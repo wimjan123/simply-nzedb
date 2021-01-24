@@ -57,10 +57,10 @@ RUN chmod +x /tmp/s6-overlay-amd64-installer && ./tmp/s6-overlay-amd64-installer
 
 # mytop + deps
 RUN apt-get install \
-  mariadb \
+  mariadb-client-10.5 \
   perl \
-  perl-dbd-mysql \
-  perl-term-readkey
+  libmysqlclient-dev \
+  libterm-readkey-perl 
 
 # Install composer
 RUN curl https://getcomposer.org/installer | php7.4 -- --install-dir=/usr/bin --filename=composer --version=1.10.19
