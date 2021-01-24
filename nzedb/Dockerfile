@@ -17,11 +17,11 @@ apt-get clean
 #   ln -s "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime && \
 #   echo "${TIMEZONE}" > /etc/timezone
 
-#Adding repository for php7.4.4
+#Adding repository for php7.3.4
 # ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 
 # RUN apk --update-cache add ca-certificates && \
-    # echo "https://dl.bintray.com/php-alpine/v3.11/php-7.4" >> /etc/apk/repositories
+    # echo "https://dl.bintray.com/php-alpine/v3.11/php-7.3" >> /etc/apk/repositories
 RUN apt-get update -y && \
     apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:ondrej/php && \
@@ -39,10 +39,10 @@ RUN apt-get install -y \
   lame less \
   make mariadb-client memcached musl \
   nginx \
-  p7zip php7.4-ctype php7.4-curl php7.4-dev php7.4-exif php7.4-fpm php7.4-gd php7.4-iconv \
-  php7.4-imagick php7.4-json php7.0-mcrypt php7.4-opcache \
-  php7.4-pdo php7.4-phar php7.4-posix php7.4-redis php7.4-mbstring \
-  php7.4-simplexml php7.4-sockets php7.4-xmlwriter php7.4-xml php7.4-xmlreader php7.4-xmlrpc pigz libmcrypt-dev \
+  p7zip php7.3-ctype php7.3-curl php7.3-dev php7.3-exif php7.3-fpm php7.3-gd php7.3-iconv \
+  php7.3-imagick php7.3-json php7.0-mcrypt php7.3-opcache \
+  php7.3-pdo php7.3-phar php7.3-posix php7.3-redis php7.3-mbstring php7.3-mysql \
+  php7.3-simplexml php7.3-sockets php7.3-xmlwriter php7.3-xml php7.3-xmlreader php7.3-xmlrpc pigz libmcrypt-dev \
   proxychains psmisc python3-pip python3 \
   strace \
   tar tig tree tzdata \
@@ -65,7 +65,7 @@ RUN apt-get -y install \
   libterm-readkey-perl
 
 # Install composer
-RUN curl https://getcomposer.org/installer | php7.4 -- --install-dir=/usr/bin --filename=composer --version=1.10.19
+RUN curl https://getcomposer.org/installer | php7.3 -- --install-dir=/usr/bin --filename=composer --version=1.10.19
 
 # Build and install mediainfo
 # ENV MEDIAINFO_VERSION 20.09
@@ -90,13 +90,13 @@ RUN pip3 install --upgrade pip && \
   pip3 install cymysql pynntp
 
 # Configure PHP
-RUN sed -ri 's/(max_execution_time =) ([0-9]+)/\1 120/' /etc/php/7.4/fpm/php.ini && \
-  sed -ri "s/(memory_limit =) (.*$)/\1 -1/" /etc/php/7.4/fpm/php.ini && \
-  sed -ri 's/;(date.timezone =)/\1 Europe\/Amsterdam/' /etc/php/7.4/fpm/php.ini && \
-  sed -ri 's/listen\s*=\s*127.0.0.1:9000/listen = 9000/g' /etc/php/7.4/fpm/pool.d/www.conf && \
-  sed -ri 's|;include_path = ".:/php/includes"|include_path = ".:/usr/share/php7.4"|g' /etc/php/7.4/fpm/php.ini && \
-  mkdir -p /var/log/php7.4-fpm/ && \
-  ln -sf /dev/stdout /var/log/php7.4-fpm.log
+RUN sed -ri 's/(max_execution_time =) ([0-9]+)/\1 120/' /etc/php/7.3/fpm/php.ini && \
+  sed -ri "s/(memory_limit =) (.*$)/\1 -1/" /etc/php/7.3/fpm/php.ini && \
+  sed -ri 's/;(date.timezone =)/\1 Europe\/Amsterdam/' /etc/php/7.3/fpm/php.ini && \
+  sed -ri 's/listen\s*=\s*127.0.0.1:9000/listen = 9000/g' /etc/php/7.3/fpm/pool.d/www.conf && \
+  sed -ri 's|;include_path = ".:/php/includes"|include_path = ".:/usr/share/php7.3"|g' /etc/php/7.3/fpm/php.ini && \
+  mkdir -p /var/log/php7.3-fpm/ && \
+  ln -sf /dev/stdout /var/log/php7.3-fpm.log
 
 # Install and configure nginx.
 RUN mkdir -p /var/log/nginx && \
@@ -123,20 +123,21 @@ RUN mkdir -p /var/www && \
   composer clear-cache
 
 # Build tmux 2.0 since tmux 2.2 has issues: https://github.com/nZEDb/nZEDb/issues/2182
-ENV TMUX_VERSION 3.1c
-RUN apt-get install gcc g++ ncurses-dev libevent-dev bsd-compat-headers && \
-  mkdir -p /tmp/tmux && \
-  cd /tmp/tmux && \
-  curl --location -o tmux.tar.gz https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz && \
-  tar xzvf tmux.tar.gz && \
-  cd tmux-${TMUX_VERSION} && \
-  ./configure --prefix /usr && \
-  make && \
-  make install && \
-  cd / && \
-  rm -rf /tmp/tmux && \
-  apk del --purge gcc g++ ncurses-dev libevent-dev bsd-compat-headers && \
-  rm -rf /var/cache/apk/*
+RUN apt install -y tmux
+# ENV TMUX_VERSION 3.1c
+# RUN apt-get install gcc g++ ncurses-dev libevent-dev bsd-compat-headers && \
+#   mkdir -p /tmp/tmux && \
+#   cd /tmp/tmux && \
+#   curl --location -o tmux.tar.gz https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz && \
+#   tar xzvf tmux.tar.gz && \
+#   cd tmux-${TMUX_VERSION} && \
+#   ./configure --prefix /usr && \
+#   make && \
+#   make install && \
+#   cd / && \
+#   rm -rf /tmp/tmux && \
+#   apk del --purge gcc g++ ncurses-dev libevent-dev bsd-compat-headers && \
+#   rm -rf /var/cache/apk/*
 
 # Build and install php-yenc
 ENV PHP_ZEPHIR_PARSER_VERSION v1.3.6
@@ -154,12 +155,12 @@ RUN cd /tmp && \
   ./configure && \
   make && \
   make install && \
-  echo "extension=zephir_parser.so" > /etc/php7.4/conf.d/98_zephir_parser.ini && \
+  echo "extension=zephir_parser.so" > /etc/php7.3/conf.d/98_zephir_parser.ini && \
   cd /tmp && \
   git clone https://github.com/niel/php-yenc.git && \
   cd php-yenc && \
   /tmp/zephir/vendor/bin/zephir install && \
-  echo "extension=yenc.so" > /etc/php7.4/conf.d/99_yenc.ini && \
+  echo "extension=yenc.so" > /etc/php7.3/conf.d/99_yenc.ini && \
   composer clear-cache && \
   cd /tmp && \
   rm -rf zephir php-yenc php-zephir-parser && \
