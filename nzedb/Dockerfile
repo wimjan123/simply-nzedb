@@ -1,8 +1,8 @@
-FROM alpine:3.7
-MAINTAINER theslydetector@gmail.com
+FROM alpine:3.13
+MAINTAINER thewillonline
 
 # Configure Timezone
-ENV TIMEZONE "America/Chicago"
+ENV TIMEZONE "Europe/Amsterdam"
 RUN rm -f /etc/localtime && \
   ln -s "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime && \
   echo "${TIMEZONE}" > /etc/timezone
@@ -17,10 +17,10 @@ RUN apk add --update \
   lame less \
   make mariadb-client memcached musl \
   nginx \
-  p7zip php7-ctype php7-curl php7-dev php7-exif php7-fpm php7-gd php7-iconv \
-  php7-imagick php7-json php7-mcrypt php7-opcache php7-openssl php7-pcntl \
-  php7-pdo php7-pdo_mysql php7-pear php7-phar php7-posix php7-redis \
-  php7-session php7-simplexml php7-sockets php7-xmlwriter php7-zlib pigz \
+  p7zip php7.4-ctype php7.4-curl php7.4-dev php7.4-exif php7.4-fpm php7.4-gd php7.4-iconv \
+  php7.4-imagick php7.4-json php7.4-mcrypt php7.4-opcache php7.4-openssl php7.4-pcntl \
+  php7.4-pdo php7.4-pdo_mysql php7.4-pear php7.4-phar php7.4-posix php7.4-redis \
+  php7.4-session php7.4-simplexml php7.4-sockets php7.4-xmlwriter php7.4-zlib pigz \
   proxychains-ng pstree py2-pip python \
   s6 strace \
   tar tig tree tzdata \
@@ -43,10 +43,10 @@ RUN apk add --update \
   rm -rf /var/cache/apk/*
 
 # Install composer
-RUN curl https://getcomposer.org/installer | php7 -- --install-dir=/usr/bin --filename=composer
+RUN curl https://getcomposer.org/installer | php7.4 -- --install-dir=/usr/bin --filename=composer
 
 # Build and install mediainfo
-ENV MEDIAINFO_VERSION 18.05
+ENV MEDIAINFO_VERSION 20.09
 RUN apk --update add gcc g++ && \
   mkdir -p /tmp && \
   cd /tmp && \
@@ -68,11 +68,11 @@ RUN pip install --upgrade pip && \
   pip install cymysql pynntp socketpool
 
 # Configure PHP
-RUN sed -ri 's/(max_execution_time =) ([0-9]+)/\1 120/' /etc/php7/php.ini && \
-  sed -ri "s/(memory_limit =) (.*$)/\1 -1/" /etc/php7/php.ini && \
-  sed -ri 's/;(date.timezone =)/\1 America\/Chicago/' /etc/php7/php.ini && \
-  sed -ri 's/listen\s*=\s*127.0.0.1:9000/listen = 9000/g' /etc/php7/php-fpm.d/www.conf && \
-  sed -ri 's|;include_path = ".:/php/includes"|include_path = ".:/usr/share/php7"|g' /etc/php7/php.ini && \
+RUN sed -ri 's/(max_execution_time =) ([0-9]+)/\1 120/' /etc/php7.4/php.ini && \
+  sed -ri "s/(memory_limit =) (.*$)/\1 -1/" /etc/php7.4/php.ini && \
+  sed -ri 's/;(date.timezone =)/\1 America\/Chicago/' /etc/php7.4/php.ini && \
+  sed -ri 's/listen\s*=\s*127.0.0.1:9000/listen = 9000/g' /etc/php7.4/php-fpm.d/www.conf && \
+  sed -ri 's|;include_path = ".:/php/includes"|include_path = ".:/usr/share/php7.4"|g' /etc/php7.4/php.ini && \
   mkdir -p /var/log/php-fpm/
 
 # Install and configure nginx.
@@ -84,7 +84,7 @@ RUN mkdir -p /var/log/nginx && \
     touch /var/log/nginx/nginx-error.log
 
 # Clone nZEDb and set directory permissions
-ENV NZEDB_VERSION "v0.8.7.0"
+ENV NZEDB_VERSION "v0.8.22.0"
 RUN mkdir -p /var/www && \
   cd /var/www && \
   git clone https://github.com/nZEDb/nZEDb.git && \
@@ -97,8 +97,8 @@ RUN mkdir -p /var/www && \
   # nuke ~350MB of composer cache
   composer clear-cache
 
-# Build tmux 2.0 since tmux 2.2 has issues: https://github.com/nZEDb/nZEDb/issues/2182 
-ENV TMUX_VERSION 2.0
+# Build tmux 2.0 since tmux 2.2 has issues: https://github.com/nZEDb/nZEDb/issues/2182
+ENV TMUX_VERSION 3.1c
 RUN apk --update add gcc g++ ncurses-dev libevent-dev bsd-compat-headers && \
   mkdir -p /tmp/tmux && \
   cd /tmp/tmux && \
@@ -114,7 +114,7 @@ RUN apk --update add gcc g++ ncurses-dev libevent-dev bsd-compat-headers && \
   rm -rf /var/cache/apk/*
 
 # Build and install php-yenc
-ENV PHP_ZEPHIR_PARSER_VERSION v1.1.2
+ENV PHP_ZEPHIR_PARSER_VERSION v1.3.6
 RUN cd /tmp && \
   apk --update add gcc re2c libc-dev sudo && \
   mkdir -p /tmp/zephir && \
@@ -125,24 +125,24 @@ RUN cd /tmp && \
   cd php-zephir-parser && \
   git checkout --quiet --force $PHP_ZEPHIR_PARSER_VERSION && \
   ./install && \
-  echo "extension=zephir_parser.so" > /etc/php7/conf.d/98_zephir_parser.ini && \
+  echo "extension=zephir_parser.so" > /etc/php7.4/conf.d/98_zephir_parser.ini && \
   cd /tmp && \
   git clone https://github.com/niel/php-yenc.git && \
   cd php-yenc && \
   /tmp/zephir/vendor/bin/zephir install && \
-  echo "extension=yenc.so" > /etc/php7/conf.d/99_yenc.ini && \
+  echo "extension=yenc.so" > /etc/php7.4/conf.d/99_yenc.ini && \
   composer clear-cache && \
   cd /tmp && \
   rm -rf zephir php-yenc php-zephir-parser && \
   apk del --purge gcc re2c libc-dev sudo
 
 # Build and install par2
-ENV PAR2_VERSION "v0.8.0"
+ENV PAR2_VERSION "v0.8.1"
 RUN apk --update add gcc autoconf automake g++ python-dev openssl-dev libffi-dev && \
   git clone https://github.com/Parchive/par2cmdline.git /tmp/par2 && \
   cd /tmp/par2 && \
   git checkout --quiet --force $PAR2_VERSION && \
-  ./automake.sh && \ 
+  ./automake.sh && \
   ./configure --prefix=/usr && \
   make && \
   make install && \

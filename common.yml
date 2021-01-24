@@ -21,7 +21,7 @@ services:
     restart: unless-stopped
     ports:
       - 8800:8800
-    env_file: 
+    env_file:
       - $PWD/etc/simply_nzedb.conf
     volumes:
       - $PWD/data/covers:/var/www/nZEDb/resources/covers/
@@ -48,7 +48,7 @@ services:
   adminer:
     image: clue/adminer
     restart: unless-stopped
-    ports: 
+    ports:
       - 8880:80
 
   redis:
