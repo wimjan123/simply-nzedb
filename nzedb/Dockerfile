@@ -17,7 +17,7 @@ apt-get clean
 #   ln -s "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime && \
 #   echo "${TIMEZONE}" > /etc/timezone
 
-#Adding repository for php7.4
+#Adding repository for php7.4.4
 # ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 
 # RUN apk --update-cache add ca-certificates && \
@@ -34,10 +34,10 @@ RUN apt-get install -y \
   lame less \
   make mariadb-client memcached musl \
   nginx \
-  p7zip php7-ctype php7-curl php7-dev php7-exif php7-fpm php7-gd php7-iconv \
-  php7-imagick php7-json php7-mcrypt php7-opcache php7-openssl php7-pcntl \
-  php7-pdo php7-pdo_mysql php7-pear php7-phar php7-posix php7-redis php7-mbstring \
-  php7-session php7-simplexml php7-sockets php7-xmlwriter php7-zlib php7-xml php7-xmlreader php7-xmlrpc pigz libmcrypt \
+  p7zip php7.4-ctype php7.4-curl php7.4-dev php7.4-exif php7.4-fpm php7.4-gd php7.4-iconv \
+  php7.4-imagick php7.4-json php7.4-mcrypt php7.4-opcache php7.4-openssl php7.4-pcntl \
+  php7.4-pdo php7.4-pdo_mysql php7.4-pear php7.4-phar php7.4-posix php7.4-redis php7.4-mbstring \
+  php7.4-session php7.4-simplexml php7.4-sockets php7.4-xmlwriter php7.4-zlib php7.4-xml php7.4-xmlreader php7.4-xmlrpc pigz libmcrypt \
   proxychains-ng pstree py3-pip python3 \
   s6 strace \
   tar tig tree tzdata \
@@ -46,9 +46,9 @@ RUN apt-get install -y \
   wget \
   zendframework \
   && \
-  # ln -s /usr/bin/php7 /usr/bin/php && \
   # ln -s /usr/bin/php7.4 /usr/bin/php && \
-  # ln -s /usr/lib/php7.4 /usr/lib/php7 && \
+  # ln -s /usr/bin/php7.4.4 /usr/bin/php && \
+  # ln -s /usr/lib/php7.4.4 /usr/lib/php7.4 && \
   rm -rf /var/cache/apk/*
 
 # vnstat in testing repo
@@ -63,7 +63,7 @@ RUN apt-get install \
   rm -rf /var/cache/apk/*
 
 # Install composer
-RUN curl https://getcomposer.org/installer | php7 -- --install-dir=/usr/bin --filename=composer --version=1.10.19
+RUN curl https://getcomposer.org/installer | php7.4 -- --install-dir=/usr/bin --filename=composer --version=1.10.19
 
 # Build and install mediainfo
 ENV MEDIAINFO_VERSION 20.09
@@ -88,13 +88,13 @@ RUN pip3 install --upgrade pip && \
   pip3 install cymysql pynntp socketpool
 
 # Configure PHP
-RUN sed -ri 's/(max_execution_time =) ([0-9]+)/\1 120/' /etc/php7/php.ini && \
-  sed -ri "s/(memory_limit =) (.*$)/\1 -1/" /etc/php7/php.ini && \
-  sed -ri 's/;(date.timezone =)/\1 Europe\/Amsterdam/' /etc/php7/php.ini && \
-  sed -ri 's/listen\s*=\s*127.0.0.1:9000/listen = 9000/g' /etc/php7/php-fpm.d/www.conf && \
-  sed -ri 's|;include_path = ".:/php/includes"|include_path = ".:/usr/share/php7"|g' /etc/php7/php.ini && \
+RUN sed -ri 's/(max_execution_time =) ([0-9]+)/\1 120/' /etc/php7.4/php.ini && \
+  sed -ri "s/(memory_limit =) (.*$)/\1 -1/" /etc/php7.4/php.ini && \
+  sed -ri 's/;(date.timezone =)/\1 Europe\/Amsterdam/' /etc/php7.4/php.ini && \
+  sed -ri 's/listen\s*=\s*127.0.0.1:9000/listen = 9000/g' /etc/php7.4/php-fpm.d/www.conf && \
+  sed -ri 's|;include_path = ".:/php/includes"|include_path = ".:/usr/share/php7.4"|g' /etc/php7.4/php.ini && \
   mkdir -p /var/log/php-fpm/ && \
-  ln -sf /dev/stdout /var/log/php7-fpm.log
+  ln -sf /dev/stdout /var/log/php7.4-fpm.log
 
 # Install and configure nginx.
 RUN mkdir -p /var/log/nginx && \
@@ -152,12 +152,12 @@ RUN cd /tmp && \
   ./configure && \
   make && \
    make install && \
-  echo "extension=zephir_parser.so" > /etc/php7/conf.d/98_zephir_parser.ini && \
+  echo "extension=zephir_parser.so" > /etc/php7.4/conf.d/98_zephir_parser.ini && \
   cd /tmp && \
   git clone https://github.com/niel/php-yenc.git && \
   cd php-yenc && \
   /tmp/zephir/vendor/bin/zephir install && \
-  echo "extension=yenc.so" > /etc/php7/conf.d/99_yenc.ini && \
+  echo "extension=yenc.so" > /etc/php7.4/conf.d/99_yenc.ini && \
   composer clear-cache && \
   cd /tmp && \
   rm -rf zephir php-yenc php-zephir-parser && \
