@@ -90,8 +90,8 @@ RUN mkdir -p /var/log/nginx && \
     mkdir -p /tmp/nginx && \
     chmod 755 /var/log/nginx && \
     chmod 777 /tmp && \
-    touch /var/log/nginx/nginx-error.log \
-    ln -sf /dev/stderr /var/log/nginx/nginx-error.log \
+    touch /var/log/nginx/nginx-error.log && \
+    ln -sf /dev/stderr /var/log/nginx/nginx-error.log && \
     ln -sf /dev/stdout /var/log/nginx/nginx-access.log
 
 # Clone nZEDb and set directory permissions
