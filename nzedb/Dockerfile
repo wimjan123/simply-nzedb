@@ -40,8 +40,8 @@ RUN apt-get install -y \
   p7zip php7.4-ctype php7.4-curl php7.4-dev php7.4-exif php7.4-fpm php7.4-gd php7.4-iconv \
   php7.4-imagick php7.4-json php7.0-mcrypt php7.4-opcache \
   php7.4-pdo php7.4-phar php7.4-posix php7.4-redis php7.4-mbstring \
-  php7.4-simplexml php7.4-sockets php7.4-xmlwriter php7.4-xml php7.4-xmlreader php7.4-xmlrpc pigz libmcrypt \
-  proxychains-ng pstree python3-pip python3 \
+  php7.4-simplexml php7.4-sockets php7.4-xmlwriter php7.4-xml php7.4-xmlreader php7.4-xmlrpc pigz libmcrypt-dev \
+  proxychains psmisc python3-pip python3 \
   strace \
   tar tig tree tzdata \
   unrar unzip util-linux \
