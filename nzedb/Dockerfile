@@ -90,11 +90,11 @@ RUN pip3 install --upgrade pip && \
   pip3 install cymysql pynntp
 
 # Configure PHP
-RUN sed -ri 's/(max_execution_time =) ([0-9]+)/\1 120/' /etc/php/7.4/php.ini && \
-  sed -ri "s/(memory_limit =) (.*$)/\1 -1/" /etc/php/7.4/php.ini && \
-  sed -ri 's/;(date.timezone =)/\1 Europe\/Amsterdam/' /etc/php/7.4/php.ini && \
-  sed -ri 's/listen\s*=\s*127.0.0.1:9000/listen = 9000/g' /etc/php/7.4/php-fpm.d/www.conf && \
-  sed -ri 's|;include_path = ".:/php/includes"|include_path = ".:/usr/share/php/7.4"|g' /etc/php/7.4/php.ini && \
+RUN sed -ri 's/(max_execution_time =) ([0-9]+)/\1 120/' /etc/php/7.4/apache2/php.ini && \
+  sed -ri "s/(memory_limit =) (.*$)/\1 -1/" /etc/php/7.4/apache2/php.ini && \
+  sed -ri 's/;(date.timezone =)/\1 Europe\/Amsterdam/' /etc/php/7.4/apache2/php.ini && \
+  sed -ri 's/listen\s*=\s*127.0.0.1:9000/listen = 9000/g' /etc/php/7.4/apache2/php-fpm.d/www.conf && \
+  sed -ri 's|;include_path = ".:/php/includes"|include_path = ".:/usr/share/php/7.4"|g' /etc/php/7.4/apache2/php.ini && \
   mkdir -p /var/log/php-fpm/ && \
   ln -sf /dev/stdout /var/log/php/7.4-fpm.log
 
@@ -154,12 +154,12 @@ RUN cd /tmp && \
   ./configure && \
   make && \
   make install && \
-  echo "extension=zephir_parser.so" > /etc/php/7.4/conf.d/98_zephir_parser.ini && \
+  echo "extension=zephir_parser.so" > /etc/php/7.4/apache2/conf.d/98_zephir_parser.ini && \
   cd /tmp && \
   git clone https://github.com/niel/php-yenc.git && \
   cd php-yenc && \
   /tmp/zephir/vendor/bin/zephir install && \
-  echo "extension=yenc.so" > /etc/php/7.4/conf.d/99_yenc.ini && \
+  echo "extension=yenc.so" > /etc/php/7.4/apache2/conf.d/99_yenc.ini && \
   composer clear-cache && \
   cd /tmp && \
   rm -rf zephir php-yenc php-zephir-parser && \
