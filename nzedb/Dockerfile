@@ -23,9 +23,9 @@ apt-get clean
 # RUN apk --update-cache add ca-certificates && \
     # echo "https://dl.bintray.com/php-alpine/v3.11/php-7.4" >> /etc/apk/repositories
 RUN apt-get update -y && \
-    apt-get install software-properties-common && \
-    add-apt-repository ppa:ondrej/php && \
-    apt-get update
+    apt-get install -y software-properties-common && \
+    add-apt-repository -y ppa:ondrej/php && \
+    apt-get update -y
 
 RUN apt-get install -y \
   bash bwm-ng \
