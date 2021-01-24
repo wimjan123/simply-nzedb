@@ -84,6 +84,7 @@ RUN curl https://getcomposer.org/installer | php7.4 -- --install-dir=/usr/bin --
 #   apt purge gcc g++
 
 # Install Python MySQL Modules
+RUN export LC_ALL="en_US.UTF-8" 
 RUN pip3 install --upgrade pip && \
   pip3 install --upgrade setuptools && \
   pip3 install cymysql pynntp socketpool
