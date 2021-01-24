@@ -7,6 +7,9 @@ RUN rm -f /etc/localtime && \
   ln -s "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime && \
   echo "${TIMEZONE}" > /etc/timezone
 
+#Adding repository for php7.4
+RUN apk add --no-cache  --repository http://dl-cdn.alpinelinux.org/alpine/edge/community php
+
 RUN apk add --update \
   bash bwm-ng \
   coreutils curl \
