@@ -33,7 +33,7 @@ RUN service apache2 start && \
 
 #Instaling MariaDB
 RUN apt-key adv -y --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 && \
-  add-apt-repository -y 'deb [arch=amd64] http://mirror.zol.co.zw/mariadb/repo/10.3/ubuntu bionic main' && \
+  add-apt-repository 'deb [arch=amd64] http://mirror.zol.co.zw/mariadb/repo/10.3/ubuntu bionic main' && \
   apt update -y && \
   apt install -y mariadb-server mariadb-client && \
   service mysql start
