@@ -66,9 +66,10 @@ RUN apt-get -y install \
 # Install composer
 RUN curl https://getcomposer.org/installer | php7.2 -- --install-dir=/usr/bin --filename=composer --version=1.10.19
 
-#install python
+#install python and git
 RUN apt-get install -y \
-  python3-pip python3
+  python3-pip python3 \
+  git
 
 
 # Install Python MySQL Modules
