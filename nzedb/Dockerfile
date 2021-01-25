@@ -79,19 +79,19 @@ RUN pip3 install --upgrade pip && \
   pip3 install cymysql pynntp
 
 # Configure PHP
-RUN echo "<VirtualHost *:80>
-    ServerAdmin webmaster@localhost
-    ServerName 127.0.0.1
-    DocumentRoot "/var/www/nZEDb/www"
-    LogLevel warn
-    ServerSignature Off
-    ErrorLog /var/log/apache2/error.log
-    <Directory "/var/www/nZEDb/www">
-       Options FollowSymLinks
-       AllowOverride All
-       Require all granted
-    </Directory>
-    Alias /covers /var/www/nZEDb/resources/covers
+RUN echo "<VirtualHost *:80> \
+    ServerAdmin webmaster@localhost \
+    ServerName 127.0.0.1 \
+    DocumentRoot "/var/www/nZEDb/www" \
+    LogLevel warn \
+    ServerSignature Off \
+    ErrorLog /var/log/apache2/error.log \
+    <Directory "/var/www/nZEDb/www"> \
+       Options FollowSymLinks \
+       AllowOverride All \
+       Require all granted \
+    </Directory> \
+    Alias /covers /var/www/nZEDb/resources/covers \
 </VirtualHost>" >> /etc/apache2/sites-available/nzedb.conf
 
 RUN  a2dissite 000-default && \
