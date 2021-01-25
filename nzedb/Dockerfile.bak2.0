@@ -31,23 +31,28 @@ RUN apt-get update -y && \
     apt-get update -y && \
     apt-get upgrade -y && \
     apt autoremove -y
-#installing apache2
+    
 RUN apt-get install -y \
-  apache2 apache2-utils && \
-  systemctl start apache2 && \
-  systemctl enable apache2 && \
-  chown www-data /var/www/html/ -R
-
-#Instaling MariaDB
-RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 && \
-  add-apt-repository 'deb [arch=amd64] http://mirror.zol.co.zw/mariadb/repo/10.3/ubuntu bionic main' && \
-  apt update && \
-  apt install mariadb-server mariadb-client && \
-  systemctl start mysql && \
-  rm /etc/systemd/system/mysql.service && \
-  rm /etc/systemd/system/mysqld.service && \
-  systemctl enable mysql && \
-  mysql_secure_installation
+  bash bwm-ng \
+  coreutils curl \
+  ffmpeg file findutils \
+  git \
+  htop \
+  iproute2 \
+  lame less \
+  make mariadb-client memcached musl \
+  nginx \
+  p7zip php7.3-ctype php7.3-curl php7.3-dev php7.3-exif php7.3-fpm php7.3-gd php7.3-iconv \
+  php7.3-imagick php7.3-json php7.0-mcrypt php7.3-opcache \
+  php7.3-pdo php7.3-phar php7.3-posix php7.3-redis php7.3-mbstring php7.3-mysql \
+  php7.3-simplexml php7.3-sockets php7.3-xmlwriter php7.3-xml php7.3-xmlreader php7.3-xmlrpc pigz libmcrypt-dev \
+  proxychains psmisc python3-pip python3 \
+  strace \
+  tar tig tree tzdata \
+  unrar unzip util-linux \
+  vim \
+  wget mediainfo \
+  zendframework
 
 #s6 installer
 ADD https://github.com/just-containers/s6-overlay/releases/download/v2.2.0.1/s6-overlay-amd64-installer /tmp/
