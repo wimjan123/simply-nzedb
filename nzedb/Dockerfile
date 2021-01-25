@@ -48,7 +48,7 @@ RUN apt install -y \
   service apache2 restart && \
   apt install -y
 
-RUN usermod -a -G www-data && \
+RUN usermod -a -G www-data root && \
   reboot
 
 #s6 installer
