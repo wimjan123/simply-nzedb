@@ -42,6 +42,16 @@ RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24
 # ADD https://github.com/wimjan123/simply-nzedb/blob/master/nzedb/automate_mysqlsecure.sh /tmp/
 # RUN chmod +x /tmp/automate_mysqlsecure.sh && ./tmp/automate_mysqlsecure.sh
 
+#PHP 7.2
+RUN apt install -y \
+  php7.2-fpm php7.2-mysql php7.2-common php7.2-gd php7.2-json php7.2-cli php7.2-curl libapache2-mod-php7.2 && \
+  a2enmod php7.2 && \
+  service apache2 restart && \
+  apt install -y
+
+RUN usermod -a -G www-data && \
+  reboot
+
 #s6 installer
 ADD https://github.com/just-containers/s6-overlay/releases/download/v2.2.0.1/s6-overlay-amd64-installer /tmp/
 RUN chmod +x /tmp/s6-overlay-amd64-installer && ./tmp/s6-overlay-amd64-installer /
@@ -175,7 +185,7 @@ RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24
 #PHP 7.2 installer
 RUN apt install -y \
   php7.2-fpm php7.2-mysql php7.2-common php7.2-gd php7.2-json php7.2-cli php7.2-curl libapache2-mod-php7.2
-  
+
 #mysql_secure_installation
 # ADD https://github.com/wimjan123/simply-nzedb/blob/master/nzedb/automate_mysqlsecure.sh /tmp/
 # RUN chmod +x /tmp/automate_mysqlsecure.sh && ./tmp/automate_mysqlsecure.sh
