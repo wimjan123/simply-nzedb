@@ -97,6 +97,7 @@ RUN sed -ri 's/(max_execution_time =) ([0-9]+)/\1 120/' /etc/php/7.3/fpm/php.ini
   sed -ri 's|;include_path = ".:/php/includes"|include_path = ".:/usr/share/php7.3"|g' /etc/php/7.3/fpm/php.ini && \
   mkdir -p /var/log/php7.3-fpm/ && \
   ln -sf /dev/stdout /var/log/php7.3-fpm.log
+  ln -s /usr/sbin/php-fpm7.3 /usr/sbin/php-fpm7
 
 # Install and configure nginx.
 RUN mkdir -p /var/log/nginx && \
