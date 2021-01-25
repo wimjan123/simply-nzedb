@@ -22,8 +22,13 @@ RUN apt-get update -y && \
 
 #installing apache2
 RUN apt-get install -y \
-  apache2 apache2-utils && \
-  service apache2 start && \
+  apache2 apache2-utils
+
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+COPY . /var/www/html/
+EXPOSE 80
+
+RUN service apache2 start && \
   chown www-data /var/www/html/ -R
 
 #Instaling MariaDB
