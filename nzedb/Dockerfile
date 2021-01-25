@@ -24,7 +24,6 @@ RUN apt-get update -y && \
 RUN apt-get install -y \
   apache2 apache2-utils && \
   service apache2 start && \
-  service apache2 enable && \
   chown www-data /var/www/html/ -R
 
 #Instaling MariaDB
