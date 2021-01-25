@@ -23,8 +23,8 @@ RUN apt-get update -y && \
 #installing apache2
 RUN apt-get install -y \
   apache2 apache2-utils && \
-  service start apache2 && \
-  service enable apache2 && \
+  service apache2 start && \
+  service apache2 enable && \
   chown www-data /var/www/html/ -R
 
 #Instaling MariaDB
@@ -32,10 +32,7 @@ RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24
   add-apt-repository 'deb [arch=amd64] http://mirror.zol.co.zw/mariadb/repo/10.3/ubuntu bionic main' && \
   apt update && \
   apt install mariadb-server mariadb-client && \
-  systemctl start mysql && \
-  rm /etc/systemd/system/mysql.service && \
-  rm /etc/systemd/system/mysqld.service && \
-  systemctl enable mysql
+  service mysql start
 
 #mysql_secure_installation
 ADD https://github.com/wimjan123/simply-nzedb/blob/master/nzedb/automate_mysqlsecure.sh /tmp/
