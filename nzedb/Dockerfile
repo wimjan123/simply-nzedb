@@ -11,7 +11,7 @@ dpkg-reconfigure -f noninteractive tzdata && \
 apt-get clean
 
 RUN apt-get update -y && \
-    apt-get install -y systemd software-properties-common && \
+    apt-get install -y curl systemd software-properties-common && \
     add-apt-repository -y ppa:ondrej/php && \
     apt-add-repository multiverse && \
     # apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc' && \
@@ -65,6 +65,11 @@ RUN apt-get -y install \
 
 # Install composer
 RUN curl https://getcomposer.org/installer | php7.2 -- --install-dir=/usr/bin --filename=composer --version=1.10.19
+
+#install python
+RUN apt-get install -y \
+  python3-pip python3
+
 
 # Install Python MySQL Modules
 RUN export LC_ALL="en_US.UTF-8"
