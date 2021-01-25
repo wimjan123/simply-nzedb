@@ -68,7 +68,7 @@ RUN curl https://getcomposer.org/installer | php7.2 -- --install-dir=/usr/bin --
 
 #install python and git
 RUN apt-get install -y \
-  python3-pip python3 \ 
+  python3-pip python3 \
   git
 
 
