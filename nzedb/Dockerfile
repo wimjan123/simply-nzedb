@@ -79,6 +79,21 @@ RUN pip3 install --upgrade pip && \
   pip3 install cymysql pynntp
 
 # Configure PHP
+RUN echo "<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    ServerName 127.0.0.1
+    DocumentRoot "/var/www/nZEDb/www"
+    LogLevel warn
+    ServerSignature Off
+    ErrorLog /var/log/apache2/error.log
+    <Directory "/var/www/nZEDb/www">
+       Options FollowSymLinks
+       AllowOverride All
+       Require all granted
+    </Directory>
+    Alias /covers /var/www/nZEDb/resources/covers
+</VirtualHost>" >> /etc/apache2/sites-available/nzedb.conf
+
 RUN sed -ri 's/(max_execution_time =) ([0-9]+)/\1 120/' /etc/php/7.2/fpm/php.ini && \
   sed -ri "s/(memory_limit =) (.*$)/\1 -1/" /etc/php/7.2/fpm/php.ini && \
   sed -ri 's/;(date.timezone =)/\1 Europe\/Amsterdam/' /etc/php/7.2/fpm/php.ini && \
@@ -86,7 +101,7 @@ RUN sed -ri 's/(max_execution_time =) ([0-9]+)/\1 120/' /etc/php/7.2/fpm/php.ini
   sed -ri 's|;include_path = ".:/php/includes"|include_path = ".:/usr/share/php7.2"|g' /etc/php/7.2/fpm/php.ini && \
   mkdir -p /var/log/php7.2-fpm/ && \
   ln -sf /dev/stdout /var/log/php7.2-fpm.log && \
-  ln -s /usr/sbin/php-fpm7.3 /usr/sbin/php-fpm7
+  ln -s /usr/sbin/php-fpm7.2 /usr/sbin/php-fpm7
 
 
 # Clone nZEDb and set directory permissions
