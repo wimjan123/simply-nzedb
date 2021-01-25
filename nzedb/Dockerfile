@@ -143,8 +143,9 @@ make -j4 && \
 make install && \
 make clean
 
-# install par2
-RUN apt-get install -y par2
+# install par2 && mediainfo
+RUN apt-get install -y \
+  par2 mediainfo ffmpeg
 
 # Create dir for importing nzbs
 RUN mkdir -p /var/www/nZEDb/resources/import
