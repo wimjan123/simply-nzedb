@@ -79,8 +79,7 @@ RUN pip3 install --upgrade pip && \
   pip3 install cymysql pynntp
 
 # Configure PHP
-SHELL ["/bin/bash", "-c"]
-RUN echo "<VirtualHost *:80> \n\
+RUN printf "<VirtualHost *:80> \n\
     ServerAdmin webmaster@localhost \n\
     ServerName 127.0.0.1 \n\
     DocumentRoot "/var/www/nZEDb/www" \n\
