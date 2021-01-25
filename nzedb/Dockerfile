@@ -44,7 +44,7 @@ RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24
 #PHP 7.2
 RUN apt install -y \
   php7.2-fpm php7.2-mysql php7.2-common php7.2-gd php7.2-json php7.2-cli php7.2-curl libapache2-mod-php7.2 && \
-  a2enmod php7.2 && \
+  a2enmod php7.2 time && \
   service apache2 restart && \
   apt install -y
 
@@ -69,7 +69,8 @@ RUN curl https://getcomposer.org/installer | php7.2 -- --install-dir=/usr/bin --
 #install python and git
 RUN apt-get install -y \
   python3-pip python3 \
-  git php-imagick php-pear php7.2-curl php7.2-gd php7.2-json php7.2-dev php7.2-gd php7.2-mbstring php7.2-xmL zip unzip
+  git php-imagick php-pear php7.2-curl php7.2-gd php7.2-json php7.2-dev php7.2-gd php7.2-mbstring php7.2-xmL zip unzip \
+  python
 
 
 # Install Python MySQL Modules
