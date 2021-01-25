@@ -69,7 +69,7 @@ RUN curl https://getcomposer.org/installer | php7.2 -- --install-dir=/usr/bin --
 #install python and git
 RUN apt-get install -y \
   python3-pip python3 \
-  git php-imagick php-pear php7.2-curl php7.2-gd php7.2-json php7.2-dev php7.2-gd php7.2-mbstring php7.2-xmL
+  git php-imagick php-pear php7.2-curl php7.2-gd php7.2-json php7.2-dev php7.2-gd php7.2-mbstring php7.2-xmL zip unzip
 
 
 # Install Python MySQL Modules
