@@ -129,8 +129,19 @@ RUN mkdir -p /var/www && \
   composer clear-cache
 
 # install tmux
-RUN apt install -y tmux
+# RUN apt install -y tmux
 
+RUN apt install -y \
+libevent-dev build-essential git autotools-dev automake pkg-config ncurses-dev python && \
+apt remove -y tmux && \
+mkdir /temp/ && cd /temp/ && \
+git clone https://github.com/tmux/tmux.git --branch 2.0 --single-branc && \
+cd tmu && \
+./autogen.sh && \
+./configur && \
+make -j4 && \
+make install && \
+make clean
 
 # install par2
 RUN apt-get install -y par2
