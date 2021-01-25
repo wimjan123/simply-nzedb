@@ -94,6 +94,11 @@ RUN echo "<VirtualHost *:80>
     Alias /covers /var/www/nZEDb/resources/covers
 </VirtualHost>" >> /etc/apache2/sites-available/nzedb.conf
 
+RUN  a2dissite 000-default && \
+ a2ensite nzedb.conf && \
+ a2enmod rewrite && \
+ service apache2 restart
+
 RUN sed -ri 's/(max_execution_time =) ([0-9]+)/\1 120/' /etc/php/7.2/fpm/php.ini && \
   sed -ri "s/(memory_limit =) (.*$)/\1 -1/" /etc/php/7.2/fpm/php.ini && \
   sed -ri 's/;(date.timezone =)/\1 Europe\/Amsterdam/' /etc/php/7.2/fpm/php.ini && \
