@@ -159,10 +159,9 @@ RUN mkdir -p /var/www/nZEDb/resources/tmp && chmod 777 /var/www/nZEDb/resources/
 
 RUN chmod 777 -R /var/lib/php/sessions
 
-RUN service apache2 start
 
 ENV TERM tmux
 EXPOSE 8800
 ADD s6 /etc/s6
-CMD ["/bin/s6-svscan","/etc/s6"]
+CMD ["/bin/s6-svscan","/etc/s6"] && service apache2 start
 WORKDIR /var/www/nZEDb/misc/update
