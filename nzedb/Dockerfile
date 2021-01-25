@@ -136,7 +136,7 @@ libevent-dev build-essential git autotools-dev automake pkg-config ncurses-dev p
 apt remove -y tmux && \
 mkdir /temp/ && cd /temp/ && \
 git clone https://github.com/tmux/tmux.git --branch 2.0 --single-branc && \
-cd tmu && \
+cd tmux && \
 ./autogen.sh && \
 ./configur && \
 make -j4 && \
