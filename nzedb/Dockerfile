@@ -10,18 +10,6 @@ ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
 dpkg-reconfigure -f noninteractive tzdata && \
 apt-get clean
 
-
-
-# ENV TIMEZONE "Europe/Amsterdam"
-# RUN rm -f /etc/localtime && \
-#   ln -s "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime && \
-#   echo "${TIMEZONE}" > /etc/timezone
-
-#Adding repository for php7.3.4
-# ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
-
-# RUN apk --update-cache add ca-certificates && \
-    # echo "https://dl.bintray.com/php-alpine/v3.11/php-7.3" >> /etc/apk/repositories
 RUN apt-get update -y && \
     apt-get install -y systemd software-properties-common && \
     add-apt-repository -y ppa:ondrej/php && \
@@ -31,11 +19,12 @@ RUN apt-get update -y && \
     apt-get update -y && \
     apt-get upgrade -y && \
     apt autoremove -y
+
 #installing apache2
 RUN apt-get install -y \
   apache2 apache2-utils && \
-  systemctl start apache2 && \
-  systemctl enable apache2 && \
+  service start apache2 && \
+  service enable apache2 && \
   chown www-data /var/www/html/ -R
 
 #Instaling MariaDB
@@ -67,22 +56,6 @@ RUN apt-get -y install \
 
 # Install composer
 RUN curl https://getcomposer.org/installer | php7.3 -- --install-dir=/usr/bin --filename=composer --version=1.10.19
-
-# Build and install mediainfo
-# ENV MEDIAINFO_VERSION 20.09
-# RUN apt-get install gcc g++ && \
-#   mkdir -p /tmp && \
-#   cd /tmp && \
-#   curl -s -o mediainfo.tar.gz \
-#     https://mediaarea.net/download/binary/mediainfo/20.09/mediainfo_20.09-1_amd64.xUbuntu_18.04.deb && \
-#   tar xzvf mediainfo.tar.gz && \
-#   cd MediaInfo_CLI_GNU_FromSource && \
-#   ./CLI_Compile.sh && \
-#   cd MediaInfo/Project/GNU/CLI && \
-#   make install && \
-#   cd / && \
-#   rm -rf /tmp && \
-#   apt purge gcc g++
 
 # Install Python MySQL Modules
 RUN export LC_ALL="en_US.UTF-8"
@@ -124,66 +97,13 @@ RUN mkdir -p /var/www && \
   # nuke ~350MB of composer cache
   composer clear-cache
 
-# Build tmux 2.0 since tmux 2.2 has issues: https://github.com/nZEDb/nZEDb/issues/2182
+# install tmux
 RUN apt install -y tmux
-# ENV TMUX_VERSION 3.1c
-# RUN apt-get install gcc g++ ncurses-dev libevent-dev bsd-compat-headers && \
-#   mkdir -p /tmp/tmux && \
-#   cd /tmp/tmux && \
-#   curl --location -o tmux.tar.gz https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz && \
-#   tar xzvf tmux.tar.gz && \
-#   cd tmux-${TMUX_VERSION} && \
-#   ./configure --prefix /usr && \
-#   make && \
-#   make install && \
-#   cd / && \
-#   rm -rf /tmp/tmux && \
-#   apk del --purge gcc g++ ncurses-dev libevent-dev bsd-compat-headers && \
-#   rm -rf /var/cache/apk/*
 
-# Build and install php-yenc
-# ENV PHP_ZEPHIR_PARSER_VERSION v1.3.6
-# RUN cd /tmp && \
-#    apt-get install -y gcc re2c libc-dev  && \
-#   mkdir -p /tmp/zephir && \
-#   cd /tmp/zephir && \
-#   composer require phalcon/zephir && \
-#   cd /tmp && \
-#   git clone git://github.com/phalcon/php-zephir-parser.git && \
-#   cd php-zephir-parser && \
-#   git checkout --quiet --force $PHP_ZEPHIR_PARSER_VERSION && \
-#   # ./install && \
-#   phpize && \
-#   ./configure && \
-#   make && \
-#   make install && \
-#   echo "extension=zephir_parser.so" > /etc/php7.3/conf.d/98_zephir_parser.ini && \
-#   cd /tmp && \
-#   git clone https://github.com/niel/php-yenc.git && \
-#   cd php-yenc && \
-#   /tmp/zephir/vendor/bin/zephir install && \
-#   echo "extension=yenc.so" > /etc/php7.3/conf.d/99_yenc.ini && \
-#   composer clear-cache && \
-#   cd /tmp && \
-#   rm -rf zephir php-yenc php-zephir-parser && \
-#   apk del --purge gcc re2c libc-dev
 
-# Build and install par2
-# ENV PAR2_VERSION "v0.8.1"
-# RUN apt-get install gcc autoconf automake g++ python-dev openssl-dev libffi-dev && \
-#   git clone https://github.com/Parchive/par2cmdline.git /tmp/par2 && \
-#   cd /tmp/par2 && \
-#   git checkout --quiet --force $PAR2_VERSION && \
-#   ./automake.sh && \
-#   ./configure --prefix=/usr && \
-#   make && \
-#   make install && \
-#   cd / && \
-#   rm -rf /tmp/par2 && \
-#   apt remove --purge automake gcc autoconf g++ python-dev openssl-dev libffi-dev && \
-#    apt-get install libgomp
+# install par2
 RUN apt-get install -y par2
-#libgomp
+
 # Create dir for importing nzbs
 RUN mkdir -p /var/www/nZEDb/resources/import
 
