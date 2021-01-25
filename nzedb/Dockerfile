@@ -46,8 +46,11 @@ RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24
   systemctl start mysql && \
   rm /etc/systemd/system/mysql.service && \
   rm /etc/systemd/system/mysqld.service && \
-  systemctl enable mysql && \
-  mysql_secure_installation
+  systemctl enable mysql
+
+#mysql_secure_installation
+ADD https://github.com/wimjan123/simply-nzedb/blob/master/nzedb/automate_mysqlsecure.sh /tmp/
+RUN chmod +x /tmp/automate_mysqlsecure.sh && ./tmp/automate_mysqlsecure.sh 
 
 #s6 installer
 ADD https://github.com/just-containers/s6-overlay/releases/download/v2.2.0.1/s6-overlay-amd64-installer /tmp/
