@@ -48,8 +48,7 @@ RUN apt install -y \
   service apache2 restart && \
   apt install -y
 
-RUN usermod -a -G www-data root && \
-  reboot
+RUN usermod -a -G www-data root
 
 #s6 installer
 ADD https://github.com/just-containers/s6-overlay/releases/download/v2.2.0.1/s6-overlay-amd64-installer /tmp/
@@ -65,7 +64,7 @@ RUN apt-get -y install \
   libterm-readkey-perl
 
 # Install composer
-RUN curl https://getcomposer.org/installer | php7.3 -- --install-dir=/usr/bin --filename=composer --version=1.10.19
+RUN curl https://getcomposer.org/installer | php7.2 -- --install-dir=/usr/bin --filename=composer --version=1.10.19
 
 # Install Python MySQL Modules
 RUN export LC_ALL="en_US.UTF-8"
@@ -74,24 +73,15 @@ RUN pip3 install --upgrade pip && \
   pip3 install cymysql pynntp
 
 # Configure PHP
-RUN sed -ri 's/(max_execution_time =) ([0-9]+)/\1 120/' /etc/php/7.3/fpm/php.ini && \
-  sed -ri "s/(memory_limit =) (.*$)/\1 -1/" /etc/php/7.3/fpm/php.ini && \
-  sed -ri 's/;(date.timezone =)/\1 Europe\/Amsterdam/' /etc/php/7.3/fpm/php.ini && \
-  sed -ri 's/listen\s*=\s*127.0.0.1:9000/listen = 9000/g' /etc/php/7.3/fpm/pool.d/www.conf && \
-  sed -ri 's|;include_path = ".:/php/includes"|include_path = ".:/usr/share/php7.3"|g' /etc/php/7.3/fpm/php.ini && \
-  mkdir -p /var/log/php7.3-fpm/ && \
-  ln -sf /dev/stdout /var/log/php7.3-fpm.log && \
+RUN sed -ri 's/(max_execution_time =) ([0-9]+)/\1 120/' /etc/php/7.2/fpm/php.ini && \
+  sed -ri "s/(memory_limit =) (.*$)/\1 -1/" /etc/php/7.2/fpm/php.ini && \
+  sed -ri 's/;(date.timezone =)/\1 Europe\/Amsterdam/' /etc/php/7.2/fpm/php.ini && \
+  sed -ri 's/listen\s*=\s*127.0.0.1:9000/listen = 9000/g' /etc/php/7.2/fpm/pool.d/www.conf && \
+  sed -ri 's|;include_path = ".:/php/includes"|include_path = ".:/usr/share/php7.2"|g' /etc/php/7.2/fpm/php.ini && \
+  mkdir -p /var/log/php7.2-fpm/ && \
+  ln -sf /dev/stdout /var/log/php7.2-fpm.log && \
   ln -s /usr/sbin/php-fpm7.3 /usr/sbin/php-fpm7
 
-# Install and configure nginx.
-RUN mkdir -p /var/log/nginx && \
-    mkdir -p /etc/nginx && \
-    mkdir -p /tmp/nginx && \
-    chmod 755 /var/log/nginx && \
-    chmod 777 /tmp && \
-    touch /var/log/nginx/nginx-error.log && \
-    ln -sf /dev/stderr /var/log/nginx/nginx-error.log &&\
-    ln -sf /dev/stdout /var/log/nginx/nginx-access.log
 
 # Clone nZEDb and set directory permissions
 ENV NZEDB_VERSION "0.x"
