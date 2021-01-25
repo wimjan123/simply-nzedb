@@ -2,7 +2,7 @@ version: '2'
 services:
 
   database:
-    image: thewillonline/nzedb-mariadb:10.4
+    image: thewillonline/nzedb-mariadb:latest
     restart: unless-stopped
     volumes:
       - $PWD/data/var_lib_mysql:/var/lib/mysql
