@@ -156,6 +156,8 @@ LABEL nzedb=$NZEDB_VERSION \
 
 RUN mkdir -p /var/www/nZEDb/resources/tmp && chmod 777 /var/www/nZEDb/resources/tmp
 
+RUN chmod 777 -R /var/lib/php/sessions
+
 ENV TERM tmux
 EXPOSE 8800
 ADD s6 /etc/s6
