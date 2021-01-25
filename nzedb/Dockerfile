@@ -49,7 +49,7 @@ RUN chmod +x /tmp/s6-overlay-amd64-installer && ./tmp/s6-overlay-amd64-installer
 
 # mytop + deps
 RUN apt-get -y install \
-  mariadb-server  \
+  # mariadb-server  \
   perl \
   libmysqlclient-dev \
   libterm-readkey-perl
