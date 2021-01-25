@@ -93,7 +93,8 @@ RUN echo "<VirtualHost *:80> \n\
        Require all granted \n\
     </Directory> \n\
     Alias /covers /var/www/nZEDb/resources/covers \n\
-</VirtualHost>" >> /etc/apache2/sites-available/nzedb.conf
+</VirtualHost> \
+" >> /etc/apache2/sites-available/nzedb.conf
 
 RUN  a2dissite 000-default && \
  a2ensite nzedb.conf && \
