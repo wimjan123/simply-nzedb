@@ -138,7 +138,7 @@ mkdir /temp/ && cd /temp/ && \
 git clone https://github.com/tmux/tmux.git --branch 2.0 --single-branc && \
 cd tmux && \
 ./autogen.sh && \
-./configur && \
+./configure && \
 make -j4 && \
 make install && \
 make clean
