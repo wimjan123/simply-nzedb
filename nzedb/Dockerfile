@@ -23,7 +23,7 @@ apt-get clean
 # RUN apk --update-cache add ca-certificates && \
     # echo "https://dl.bintray.com/php-alpine/v3.11/php-7.3" >> /etc/apk/repositories
 RUN apt-get update -y && \
-    apt-get install -y software-properties-common && \
+    apt-get install -y systemd software-properties-common && \
     add-apt-repository -y ppa:ondrej/php && \
     apt-add-repository multiverse && \
     # apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc' && \
@@ -50,7 +50,7 @@ RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24
 
 #mysql_secure_installation
 ADD https://github.com/wimjan123/simply-nzedb/blob/master/nzedb/automate_mysqlsecure.sh /tmp/
-RUN chmod +x /tmp/automate_mysqlsecure.sh && ./tmp/automate_mysqlsecure.sh 
+RUN chmod +x /tmp/automate_mysqlsecure.sh && ./tmp/automate_mysqlsecure.sh
 
 #s6 installer
 ADD https://github.com/just-containers/s6-overlay/releases/download/v2.2.0.1/s6-overlay-amd64-installer /tmp/
