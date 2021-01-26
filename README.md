@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 [![Build Status](https://travis-ci.org/thewillonline/nzedb.svg?branch=master)](https://travis-ci.org/)
 [![](https://img.shields.io/docker/pulls/thewillonline/nzedb.svg)](https://hub.docker.com/r/thewillonline/nzedb 'DockerHub')
+=======
+[![Build Status](https://travis-ci.org/thewillonline/nzedb-docker.svg?branch=master)](https://travis-ci.org/thewillonline/nzedb-docker)
+[![](https://img.shields.io/docker/pulls/thewillonline/nzedb-docker.svg)](https://hub.docker.com/r/thewillonline/nzedb-docker 'DockerHub')
+>>>>>>> 394f3d73b9bb9cef6f7e11e6497f3b739002c83d
 
 # Simply nZEDb
+NEEDS UPDATING!
+
+
 
 Set up your own nZEDb usenet indexer in no time at all.
 This is a docker based installation based on the super-slim alpine linux distro.
