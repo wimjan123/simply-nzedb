@@ -1,10 +1,9 @@
-[![Build Status](https://travis-ci.org/slydetector/simply-nzedb.svg?branch=master)](https://travis-ci.org/slydetector/simply-nzedb)
-[![](https://img.shields.io/docker/pulls/slydetector/simply-nzedb.svg)](https://hub.docker.com/r/slydetector/simply-nzedb 'DockerHub')
-[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/simply-nzedb/Lobby)
+[![Build Status](https://travis-ci.org/thewillonline/nzedb.svg?branch=master)](https://travis-ci.org/)
+[![](https://img.shields.io/docker/pulls/thewillonline/nzedb.svg)](https://hub.docker.com/r/thewillonline/nzedb 'DockerHub')
 
 # Simply nZEDb
 
-Set up your own nZEDb usenet indexer in no time at all. 
+Set up your own nZEDb usenet indexer in no time at all.
 This is a docker based installation based on the super-slim alpine linux distro.
 
 ## Requirements
@@ -37,7 +36,7 @@ $ vim etc/simply_nzedb.conf
 $ bin/setup_data_dir
 
 # Start up nzedb to do initial setup
-$ [sudo] make start 
+$ [sudo] make start
 ```
 
 ### Step 2 - Automated web setup
@@ -69,7 +68,7 @@ $ [sudo] make start
 # Ctrl-a n    Next window
 # Ctrl-a c    Create new window
 # Ctrl-a d    Detach from tmux
-# 
+#
 $ [sudo] make attach
 ```
 Go to ```http://<hostname>:8800/browse?t=5000``` and you should see some TV releases soon.
@@ -80,7 +79,7 @@ Congratulations, you've just accomplished the hardest part of running nZEDb, set
 Run ``make`` to see what else you can do.
 
 ```
-$ make 
+$ make
 Welcome to simply-nzedb!
 
 Core commands:
