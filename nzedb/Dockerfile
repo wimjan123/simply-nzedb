@@ -173,7 +173,7 @@ RUN mkdir -p /var/www/nZEDb/resources/tmp && chmod 777 /var/www/nZEDb/resources/
 RUN chmod 777 -R /var/lib/php/sessions
 
 
-ENV TERM tmuxd
+ENV TERM tmux
 EXPOSE 8800
 ADD s6 /etc/s6
 CMD ["/bin/s6-svscan","/etc/s6"] && /usr/sbin/service apache2 start
