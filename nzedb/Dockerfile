@@ -176,5 +176,5 @@ RUN chmod 777 -R /var/lib/php/sessions
 ENV TERM tmux
 EXPOSE 8800
 ADD s6 /etc/s6
-CMD ["/bin/s6-svscan","/etc/s6"] && service apache2 start
+CMD ["/bin/s6-svscan","/etc/s6"] && /usr/sbin/service apache2 start
 WORKDIR /var/www/nZEDb/misc/update
