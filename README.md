@@ -1,8 +1,10 @@
-[![Build Status](https://travis-ci.org/slydetector/simply-nzedb.svg?branch=master)](https://travis-ci.org/slydetector/simply-nzedb)
-[![](https://img.shields.io/docker/pulls/slydetector/simply-nzedb.svg)](https://hub.docker.com/r/slydetector/simply-nzedb 'DockerHub')
-[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/simply-nzedb/Lobby)
+[![Build Status](https://travis-ci.org/thewillonline/nzedb-docker.svg?branch=master)](https://travis-ci.org/thewillonline/nzedb-docker)
+[![](https://img.shields.io/docker/pulls/thewillonline/nzedb-docker.svg)](https://hub.docker.com/r/thewillonline/nzedb-docker 'DockerHub')
 
 # Simply nZEDb
+NEEDS UPDATING!
+
+
 
 Set up your own nZEDb usenet indexer in no time at all. 
 This is a docker based installation based on the super-slim alpine linux distro.
