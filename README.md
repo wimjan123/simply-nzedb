@@ -2,6 +2,9 @@
 [![](https://img.shields.io/docker/pulls/thewillonline/nzedb-docker.svg)](https://hub.docker.com/r/thewillonline/nzedb-docker 'DockerHub')
 
 # Simply nZEDb
+NEEDS UPDATING!
+
+
 
 Set up your own nZEDb usenet indexer in no time at all. 
 This is a docker based installation based on the super-slim alpine linux distro.
