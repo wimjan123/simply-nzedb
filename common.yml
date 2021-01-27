@@ -56,7 +56,7 @@ services:
     restart: unless-stopped
 
   sphinxsearch:
-    image: thewillonline/nzedb-sphinxsearch:dev
+    image: thewillonline/nzedb-sphinxsearch:latest
     restart: unless-stopped
     volumes:
       - $PWD/data/sphinx/:/opt/sphinx/index
