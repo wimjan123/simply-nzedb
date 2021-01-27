@@ -30,3 +30,14 @@ services:
     extends:
       file: common.yml
       service: redis
+
+  sphinxsearch:
+    extends:
+      file: common.yml
+      service: sphinxsearch
+    links:
+      - database
+      - nzedb
+    depends_on:
+      - database
+      - nzedb
