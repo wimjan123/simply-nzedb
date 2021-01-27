@@ -61,6 +61,5 @@ services:
     volumes:
       - $PWD/data/sphinx/:/opt/sphinx/index
       - $PWD/data/sphinx.conf:/opt/sphinx/conf/sphinx.conf
-    environment:
     ports:
       - "127.0.0.1:36307:36307"
