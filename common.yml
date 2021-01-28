@@ -66,5 +66,5 @@ services:
       - $PWD/data/sphinx/lib/:/var/lib/sphinxsearch/data/
     ports:
       - 127.0.0.1:36307:36307
-      - 127.0.0.1:9312:9312
+#      - 127.0.0.1:9312:9312
       - 127.0.0.1:9306:9306
