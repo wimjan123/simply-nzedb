@@ -55,41 +55,41 @@ services:
     image: redis:3.2.6-alpine
     restart: unless-stopped
 
-  manticore:
-    image: manticoresearch/manticore:latest
+  # manticore:
+  #   image: manticoresearch/manticore:latest
+  #   restart: unless-stopped
+  #   ulimits:
+  #     nproc: 65535
+  #     nofile:
+  #        soft: 65535
+  #        hard: 65535
+  #     memlock:
+  #       soft: -1
+  #       hard: -1
+  #   volumes:
+  #     - $PWD/data/manticore:/var/lib/manticore
+  #     - $PWD/data/manticore.conf:/etc/manticoresearch/manticore.conf
+  #     - $PWD/data/manticore/pid/:/var/run/sphinxsearch/
+  #     - $PWD/data/manticore/logs/:/var/log/sphinxsearch/
+  #     - $PWD/data/manticore/data:/var/lib/sphinxsearch/data/
+  #     # - $PWD/data/sphinx/pid/:/var/run/sphinxsearch/
+  #     # - $PWD/data/sphinx/logs/:/var/log/sphinxsearch/
+  #     # - $PWD/data/sphinx/lib/:/var/lib/sphinxsearch/data/
+  #   ports:
+  #     - 127.0.0.1:9306:9306
+  #     - 127.0.0.1:9308:9308
+
+
+  sphinxsearch:
+    image: thewillonline/nzedb-sphinxsearch:latest
     restart: unless-stopped
-    ulimits:
-      nproc: 65535
-      nofile:
-         soft: 65535
-         hard: 65535
-      memlock:
-        soft: -1
-        hard: -1
     volumes:
-      - $PWD/data/manticore:/var/lib/manticore
-      - $PWD/data/manticore.conf:/etc/manticoresearch/manticore.conf
-      - $PWD/data/manticore/pid/:/var/run/sphinxsearch/
-      - $PWD/data/manticore/logs/:/var/log/sphinxsearch/
-      - $PWD/data/manticore/data:/var/lib/sphinxsearch/data/
-      # - $PWD/data/sphinx/pid/:/var/run/sphinxsearch/
-      # - $PWD/data/sphinx/logs/:/var/log/sphinxsearch/
-      # - $PWD/data/sphinx/lib/:/var/lib/sphinxsearch/data/
+      - $PWD/data/sphinx/:/opt/sphinx/index
+      - $PWD/data/sphinx.conf:/opt/sphinx/conf/sphinx.conf
+      - $PWD/data/sphinx/pid/:/var/run/sphinxsearch/
+      - $PWD/data/sphinx/logs/:/var/log/sphinxsearch/
+      - $PWD/data/sphinx/lib/:/var/lib/sphinxsearch/data/
     ports:
-      - 127.0.0.1:9306:9306
-      - 127.0.0.1:9308:9308
-
-
-#   sphinxsearch:
-#     image: thewillonline/nzedb-sphinxsearch:latest
-#     restart: unless-stopped
-#     volumes:
-#       - $PWD/data/sphinx/:/opt/sphinx/index
-#       - $PWD/data/sphinx.conf:/opt/sphinx/conf/sphinx.conf
-#       - $PWD/data/sphinx/pid/:/var/run/sphinxsearch/
-#       - $PWD/data/sphinx/logs/:/var/log/sphinxsearch/
-#       - $PWD/data/sphinx/lib/:/var/lib/sphinxsearch/data/
-#     ports:
-#       - 127.0.0.1:36307:36307
-# #      - 127.0.0.1:9312:9312
-# #      - 127.0.0.1:9306:9306
+      - 127.0.0.1:36307:36307
+#      - 127.0.0.1:9312:9312
+#      - 127.0.0.1:9306:9306
