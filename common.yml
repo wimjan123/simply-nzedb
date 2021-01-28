@@ -69,6 +69,7 @@ services:
     volumes:
       - $PWD/data/manticore:/var/lib/manticore
       - $PWD/data/manticore.conf:/etc/manticoresearch/manticore.conf
+      - $PWD/data/manticore/pid/:/var/run/sphinxsearch/
       # - $PWD/data/sphinx/pid/:/var/run/sphinxsearch/
       # - $PWD/data/sphinx/logs/:/var/log/sphinxsearch/
       # - $PWD/data/sphinx/lib/:/var/lib/sphinxsearch/data/
