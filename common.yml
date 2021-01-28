@@ -61,6 +61,6 @@ services:
     volumes:
       - $PWD/data/sphinx/:/opt/sphinx/index
       - $PWD/data/sphinx.conf:/opt/sphinx/conf/sphinx.conf
-      - $PWD/data/sphinx/pid:/var/run/sphinxsearch/searchd.pid
+      - $PWD/data/sphinx/pid/:/var/run/sphinxsearch/
     ports:
       - "127.0.0.1:36307:36307"
