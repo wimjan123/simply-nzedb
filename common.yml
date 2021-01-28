@@ -72,7 +72,6 @@ services:
       - $PWD/data/manticore/pid/:/var/run/sphinxsearch/
       - $PWD/data/manticore/logs/:/var/log/sphinxsearch/
       - $PWD/data/manticore/data:/var/lib/sphinxsearch/data/
-      - $PWD/data/manticore/logs/:/var/log/sphinxsearch/
       # - $PWD/data/sphinx/pid/:/var/run/sphinxsearch/
       # - $PWD/data/sphinx/logs/:/var/log/sphinxsearch/
       # - $PWD/data/sphinx/lib/:/var/lib/sphinxsearch/data/
