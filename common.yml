@@ -63,5 +63,6 @@ services:
       - $PWD/data/sphinx.conf:/opt/sphinx/conf/sphinx.conf
       - $PWD/data/sphinx/pid/:/var/run/sphinxsearch/
       - $PWD/data/sphinx/logs/:/var/log/sphinxsearch/
+      - $PWD/data/sphinx/lib/:/var/lib/sphinxsearch/data/
     ports:
       - "127.0.0.1:36307:36307"
