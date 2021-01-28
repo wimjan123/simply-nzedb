@@ -13,9 +13,11 @@ services:
     links:
       - database
       - redis
+      - sphinxsearch
     depends_on:
       - database
       - redis
+      - sphinxsearch
 
   adminer:
     extends:
