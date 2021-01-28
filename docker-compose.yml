@@ -31,10 +31,10 @@ services:
       file: common.yml
       service: redis
 
-  sphinxsearch:
+  manticore:
     extends:
       file: common.yml
-      service: sphinxsearch
+      service: manticore
     links:
       - database
       - nzedb
