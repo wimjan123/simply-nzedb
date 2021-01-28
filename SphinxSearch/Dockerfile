@@ -1,5 +1,4 @@
 # Original Github/Maintainer: https://github.com/macbre/docker-sphinxsearch
-
 # Dockerfile for Sphinx SE
 # https://hub.docker.com/_/alpine/
 FROM alpine:3.12
