@@ -20,7 +20,7 @@ RUN wget -O /mysqltuner.tar.gz https://github.com/major/MySQLTuner-perl/archive/
   && rm /mysqltuner.tar.gz \
   && chmod +x /mysqltuner/mysqltuner.pl
 
-# Install hook to change mysql user id on startup
-COPY moduser-entrypoint.sh /usr/local/bin
-ENTRYPOINT ["moduser-entrypoint.sh"]
+# # Install hook to change mysql user id on startup
+# COPY moduser-entrypoint.sh /usr/local/bin
+# ENTRYPOINT ["moduser-entrypoint.sh"]
 CMD ["mysqld"]
