@@ -70,4 +70,4 @@ venv:
 	@bin/build_virtualenv
 
 znc:
-	@bin/znc_shell -B
+	@bin/znc_shell
