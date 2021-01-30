@@ -1,4 +1,4 @@
-.PHONY: attach backup build help logs mysql restore shell start status stop test
+.PHONY: attach backup build help logs mysql restore shell start status stop test znc
 
 COMPOSE="venv/bin/docker-compose"
 
