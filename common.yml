@@ -96,7 +96,6 @@ services:
 
   znc:
     image: ghcr.io/linuxserver/znc
-    container_name: znc
     environment:
       - PUID=1000
       - PGID=1000

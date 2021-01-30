@@ -44,3 +44,7 @@ services:
       - database
       - nzedb
   
+  znc:
+    extends:
+      file: common.yml
+      service: znc
