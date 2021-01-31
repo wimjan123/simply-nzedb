@@ -146,7 +146,7 @@ make clean
 
 # install par2 && mediainfo
 RUN apt-get install -y \
-  par2
+  par2 gzip
 
 # Create dir for importing nzbs
 RUN mkdir -p /var/www/nZEDb/resources/import
