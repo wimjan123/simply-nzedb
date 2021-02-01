@@ -43,8 +43,3 @@ services:
     depends_on:
       - database
       - nzedb
-  
-  znc:
-    extends:
-      file: common.yml
-      service: znc
