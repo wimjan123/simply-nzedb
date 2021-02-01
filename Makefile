@@ -19,7 +19,6 @@ help:
 	@echo "  start - start nzedb (restarts if it is already running)"
 	@echo "  status - shows running containers"
 	@echo "  stop - stops nzedb"
-	@echo "  znc - open znc shell"
 	@echo ""
 	@echo "Developer commands:"
 	@echo ""
@@ -68,6 +67,3 @@ test:
 
 venv:
 	@bin/build_virtualenv
-
-znc:
-	@bin/znc_shell
