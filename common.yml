@@ -93,15 +93,15 @@ services:
       - 127.0.0.1:36307:36307
 #      - 127.0.0.1:9312:9312
 #      - 127.0.0.1:9306:9306
-
-  znc:
-    image: ghcr.io/linuxserver/znc
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Amsterdam
-    volumes:
-      - $PWD/data/znc/:/config
-    ports:
-      - 6501:6501
-    restart: unless-stopped
+  #
+  # znc:
+  #   image: ghcr.io/linuxserver/znc
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Europe/Amsterdam
+  #   volumes:
+  #     - $PWD/data/znc/:/config
+  #   ports:
+  #     - 6501:6501
+  #   restart: unless-stopped
