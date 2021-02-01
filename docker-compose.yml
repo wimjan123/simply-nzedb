@@ -13,11 +13,9 @@ services:
     links:
       - database
       - redis
-      - znc
     depends_on:
       - database
       - redis
-      - znc
 
   adminer:
     extends:
