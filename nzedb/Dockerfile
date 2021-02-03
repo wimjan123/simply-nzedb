@@ -78,7 +78,7 @@ RUN mkdir /rarinstall && cd /rarinstall && \
   wget https://www.rarlab.com/rar/rarlinux-x64-6.0.0.tar.gz && \
   tar xfv rarlinux* && \
   cd rar && \
-  cp unrar /usr/bin/ 
+  cp unrar /usr/bin/
 
 # Install Python MySQL Modules
 RUN export LC_ALL="en_US.UTF-8"
@@ -150,7 +150,7 @@ make -j4 && \
 make install && \
 make clean
 
-# install par2 && mediainfo
+# install par2
 RUN apt-get install -y \
   par2 gzip
 
