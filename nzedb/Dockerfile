@@ -74,7 +74,7 @@ RUN apt-get install -y \
   rar p7zip-full lame mediainfo ffmpeg nano wget
 
 #Install Rar & Unrar 6
-RUN mkdir /rarinstall
+RUN mkdir /rarinstall && cd /rarinstall
   wget https://www.rarlab.com/rar/rarlinux-x64-6.0.0.tar.gz
 
 
