@@ -71,11 +71,12 @@ RUN apt-get install -y \
   python3-pip python3 \
   git php-imagick php-pear php7.2-curl php7.2-gd php7.2-json php7.2-dev php7.2-gd php7.2-mbstring php7.2-xml zip unzip \
   python python-setuptools python-dev build-essential \
-  rar p7zip-full lame mediainfo ffmpeg nano wget
+  p7zip-full lame mediainfo ffmpeg nano wget
 
 #Install Rar & Unrar 6
 RUN mkdir /rarinstall && cd /rarinstall
   wget https://www.rarlab.com/rar/rarlinux-x64-6.0.0.tar.gz
+
 
 
 # Install Python MySQL Modules
