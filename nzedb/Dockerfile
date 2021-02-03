@@ -80,10 +80,6 @@ RUN mkdir /rarinstall && cd /rarinstall && \
   cd rar && \
   cp unrar /usr/bin/ 
 
-
-
-
-
 # Install Python MySQL Modules
 RUN export LC_ALL="en_US.UTF-8"
 RUN pip3 install --upgrade pip && \
