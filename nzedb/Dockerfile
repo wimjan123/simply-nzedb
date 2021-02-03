@@ -76,7 +76,9 @@ RUN apt-get install -y \
 #Install Rar & Unrar 6
 RUN mkdir /rarinstall && cd /rarinstall && \
   wget https://www.rarlab.com/rar/rarlinux-x64-6.0.0.tar.gz && \
-  tar xfv rarlinux* 
+  tar xfv rarlinux* && \
+  cd rar && \
+  cp unrar /usr/bin/ 
 
 
 
