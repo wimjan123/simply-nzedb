@@ -33,9 +33,9 @@ IRC_PASSWORD=""
 #-----------------
 # newznab Admin User
 #-----------------
-newznab_ADMIN_USERNAME=newznab
-newznab_ADMIN_PASSWORD=newznab
-newznab_ADMIN_EMAIL=newznab@localhost.com
+NZEDB_ADMIN_USERNAME=newznab
+NZEDB_ADMIN_PASSWORD=newznab
+NZEDB_ADMIN_EMAIL=newznab@localhost.com
 
 #----------------
 # Socks Proxy
