@@ -1,7 +1,0 @@
-sudo: required
-
-services:
-  - docker
-
-script:
-  - bin/acceptance_test
