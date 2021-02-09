@@ -1,4 +1,4 @@
-FROM mariadb:10.3.27
+FROM mariadb:10.5.8
 MAINTAINER thewillonline
 
 # MariaDB Configuration
